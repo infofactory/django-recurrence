@@ -1,0 +1,272 @@
+{% load i18n %}
+<div class="recurrence-widget-container">
+
+<textarea class="recurrence-widget" name="{{ widget.name }}"{% include "django/forms/widgets/attrs.html" %}>
+{% if widget.value %}{{ widget.value }}{% endif %}
+</textarea>
+
+<script class="recurrence-display-i18n" type="application/json">
+  {
+    "tokens": {
+      "midnight": "{% trans 'midnight' %}",
+      "noon": "{% trans 'noon' %}",
+      "on_the_items": "{% blocktrans trimmed with items='%(items)s' %}on the {{ items }}{% endblocktrans %}",
+      "every_number_freq": "{% blocktrans trimmed with number='%(number)s' freq='%(freq)s' %}every {{ number }} {{ freq }}{% endblocktrans %}",
+      "each": "{% blocktrans trimmed with items='%(items)s' %}each {{ items }}{% endblocktrans %}",
+      "count": "{% blocktrans trimmed with number='%(number)s' %}occuring {{ number }} time{% endblocktrans %}",
+      "count_plural": "{% blocktrans trimmed with number='%(number)s' %}occuring {{ number }} times{% endblocktrans %}",
+      "until": "{% blocktrans trimmed with date='%(date)s' %}until {{ date }}{% endblocktrans %}"
+    },
+    "timeintervals": [
+      "{% trans 'year' %}",
+      "{% trans 'month' %}",
+      "{% trans 'week' %}",
+      "{% trans 'day' %}",
+      "{% trans 'hour' %}",
+      "{% trans 'minute' %}",
+      "{% trans 'second' %}"
+    ],
+    "timeintervals_plural": [
+      "{% trans 'years' %}",
+      "{% trans 'months' %}",
+      "{% trans 'weeks' %}",
+      "{% trans 'days' %}",
+      "{% trans 'hours' %}",
+      "{% trans 'minutes' %}",
+      "{% trans 'seconds' %}"
+    ],
+    "frequencies": [
+      "{% trans 'annually' %}",
+      "{% trans 'monthly' %}",
+      "{% trans 'weekly' %}",
+      "{% trans 'daily' %}",
+      "{% trans 'hourly' %}",
+      "{% trans 'minutely' %}",
+      "{% trans 'secondly' %}"
+    ],
+    "weekdays": [
+      {% for weekday in display.weekdays %}"{{ weekday|date:'l' }}"{% if not forloop.last %},{% endif %}
+      {% endfor %}
+    ],
+    "weekdays_short": [
+      {% for weekday in display.weekdays %}"{{ weekday|date:'D' }}"{% if not forloop.last %},{% endif %}
+      {% endfor %}
+    ],
+    "weekdays_oneletter": [
+      {% for weekday in display.weekdays %}"{{ weekday|date:'D'|upper|slice:"0:1" }}"{% if not forloop.last %},{% endif %}
+      {% endfor %}
+    ],
+    "weekdays_position": {
+      "1": "{% blocktrans trimmed with weekday='%(weekday)s' %}first {{ weekday }}{% endblocktrans %}",
+      "2": "{% blocktrans trimmed with weekday='%(weekday)s' %}second {{ weekday }}{% endblocktrans %}",
+      "3": "{% blocktrans trimmed with weekday='%(weekday)s' %}third {{ weekday }}{% endblocktrans %}",
+      "4": "{% blocktrans trimmed with weekday='%(weekday)s' %}fourth {{ weekday }}{% endblocktrans %}",
+      "-1": "{% blocktrans trimmed with weekday='%(weekday)s' %}last {{ weekday }}{% endblocktrans %}",
+      "-2": "{% blocktrans trimmed with weekday='%(weekday)s' %}second last {{ weekday }}{% endblocktrans %}",
+      "-3": "{% blocktrans trimmed with weekday='%(weekday)s' %}third last {{ weekday }}{% endblocktrans %}"
+    },
+    "weekdays_position_short": {
+      "1": "{% blocktrans trimmed with weekday='%(weekday)s' %}1st {{ weekday }} {% endblocktrans %}",
+      "2": "{% blocktrans trimmed with weekday='%(weekday)s' %}2nd {{ weekday }} {% endblocktrans %}",
+      "3": "{% blocktrans trimmed with weekday='%(weekday)s' %}3rd {{ weekday }} {% endblocktrans %}",
+      "4": "{% blocktrans trimmed with weekday='%(weekday)s' %}4th {{ weekday }} {% endblocktrans %}",
+      "-1": "{% blocktrans trimmed with weekday='%(weekday)s' %}last {{ weekday }} {% endblocktrans %}",
+      "-2": "{% blocktrans trimmed with weekday='%(weekday)s' %}2nd last {{ weekday }} {% endblocktrans %}",
+      "-3": "{% blocktrans trimmed with weekday='%(weekday)s' %}3rd last {{ weekday }} {% endblocktrans %}"
+    },
+    "last_of_month": {
+      "-1": "{% trans 'last' %}",
+      "-2": "{% trans 'second last' %}",
+      "-3": "{% trans 'third last' %}",
+      "-4": "{% trans 'fourth last' %}"
+    },
+    "last_of_month_short": {
+      "-1": "{% trans 'last' %}",
+      "-2": "{% trans '2nd last' %}",
+      "-3": "{% trans '3rd last' %}",
+      "-4": "{% trans '4th last' %}"
+    },
+    "months": [
+      {% for month in display.months %}"{{ month|date:'F' }}"{% if not forloop.last %},{% endif %}
+      {% endfor %}
+    ],
+    "months_short": [
+      {% for month in display.months %}"{{ month|date:'M' }}"{% if not forloop.last %},{% endif %}
+      {% endfor %}
+    ],
+    "months_ap": [
+      {% for month in display.months %}"{{ month|date:'N' }}"{% if not forloop.last %},{% endif %}
+      {% endfor %}
+    ],
+    "ampm": {
+      "am": "{% trans 'a.m.' %}",
+      "pm": "{% trans 'p.m.' %}",
+      "AM": "{% trans 'AM' %}",
+      "PM": "{% trans 'PM' %}"
+    },
+    "month_day": "{% trans '%j%S' context 'Day of month' %}",
+    "day_format": "{% trans '%l, %F %j, %Y' context 'Date format' %}",
+    "mode": {
+      "inclusion": "{% trans 'including' %}",
+      "exclusion": "{% trans 'excluding' %}"
+    },
+    "labels": {
+      "count": "{% blocktrans trimmed with number='%(number)s' %}Occurs {{ number }} time{% endblocktrans %}",
+      "count_plural": "{% blocktrans trimmed with number='%(number)s' %}Occurs {{ number }} times{% endblocktrans %}"
+    }
+  }
+</script>
+
+<div class="recurrence-widget">
+
+  <div class="panel" data-recurrence-template="panel">
+    <div class="header">
+      <button role="button" class="remove" title="{% trans "Delete" %}">×</button>
+      <a class="title" href="#"></a>
+    </div>
+    <div class="body">
+    </div>
+  </div>
+
+  <div class="recurrence" data-recurrence-template="rule-form">
+    <div class="mode">
+      <input class="checkbox" type="checkbox" name="mode">
+      <span class="recurrence-label">{% trans "Exclude these occurences" %}</span>
+    </div>
+    <div class="interval">
+      <span class="recurrence-label">{% trans "Every" %}</span>
+      <input name="interval" type="number" size="4" value="1" min="1">
+      <select name="freq">
+        <option value="0" data-singular="{% trans "year" %}" data-plural="{% trans "years" %}">{% trans "year" %}</option>
+        <option value="1" data-singular="{% trans "month" %}" data-plural="{% trans "months" %}">{% trans "month" %}</option>
+        <option value="2" data-singular="{% trans "week" %}" data-plural="{% trans "weeks" %}">{% trans "week" %}</option>
+        <option value="3" data-singular="{% trans "day" %}" data-plural="{% trans "days" %}">{% trans "day" %}</option>
+      </select>
+    </div>
+    <div class="form">
+      <div class="yearly-form hidden">
+        <div>
+          <table class="grid months" cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+              <tr>
+                {% for month in display.months %}
+                  <td data-value="{{ month|date:'n' }}">{{ month|date:'M' }}</td>
+                  {% if forloop.counter|divisibleby:"4" and not forloop.last %}
+                  </tr>
+                  <tr>
+                  {% endif %}
+                {% endfor %}
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="byday">
+          <input class="checkbox" type="checkbox" name="yearly" value="byday">
+          <span class="recurrence-label">{% trans "On the:" %}</span>
+          <div class="section">
+            <select name="position">
+              <option value="1">{% trans "first" %}</option>
+              <option value="2">{% trans "second" %}</option>
+              <option value="3">{% trans "third" %}</option>
+              <option value="4">{% trans "fourth" %}</option>
+              <option value="-1">{% trans "last" %}</option>
+              <option value="-2">{% trans "second last" %}</option>
+              <option value="-3">{% trans "third last" %}</option>
+            </select>
+            <select name="weekday">
+              {% for weekday in display.weekdays %}
+                <option value="{{ forloop.counter0 }}">{{ weekday|date:'l' }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="monthly-form hidden">
+        <div class="monthday">
+          <input class="radio" type="radio" name="monthly" value="monthday">
+          <span class="recurrence-label">{% trans "Each:" %}</span>
+          <div class="section">
+            <table class="grid" cellpadding="0" cellspacing="0" border="0">
+              <tbody>
+                <tr>
+                  {% for month in display.monthdays|add:display.last_monthdays %}
+                    <td data-value="{{ month }}">{{ month }}</td>
+                    {% if forloop.counter|divisibleby:"7" and not forloop.last %}
+                    </tr>
+                    <tr>
+                    {% endif %}
+                  {% endfor %}
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="weekday">
+          <input class="radio" type="radio" name="monthly" value="weekday">
+          <span class="recurrence-label">{% trans "On the:" %}</span>
+          <div class="section">
+            <select name="position">
+              <option value="1">{% trans "first" %}</option>
+              <option value="2">{% trans "second" %}</option>
+              <option value="3">{% trans "third" %}</option>
+              <option value="4">{% trans "fourth" %}</option>
+              <option value="-1">{% trans "last" %}</option>
+              <option value="-2">{% trans "second last" %}</option>
+              <option value="-3">{% trans "third last" %}</option>
+            </select>
+            <select name="weekday">
+              {% for weekday in display.weekdays %}
+                <option value="{{ forloop.counter0 }}">{{ weekday|date:'l' }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="weekly-form hidden">
+        <div class="weekday-grid">
+          {% for weekday in display.weekdays %}
+            <button type="button" class="weekday btn" value="{{ forloop.counter0 }}">{{ weekday|date:'D' }}</button>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="daily-form hidden"></div>
+    </div>
+    <div class="limit">
+      <input class="checkbox" type="checkbox" name="limit">
+      <span class="recurrence-label">{% trans "Repeat until" %}:</span>
+      <ul class="until-count">
+        <li class="until">
+          <input class="radio" type="radio" name="until_count" value="until">
+          <span class="recurrence-label">{% trans "Date" %}:</span>
+          <input class="vTextField" size="10" type="date">
+        </li>
+        <li class="count">
+          <input class="radio" type="radio" name="until_count" value="count">
+          <span class="recurrence-label"></span>
+          <input name="count" type="number" size="4" value="1" min="1">
+          <span class="recurrence-label"></span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="date" data-recurrence-template="date-form">
+    <div class="mode">
+      <input class="checkbox" type="checkbox" name="mode">
+      <span class="recurrence-label">{% trans "Exclude this date" %}</span>
+    </div>
+    <div class="date">
+      <span class="recurrence-label">{% trans "Date" %}:</span>
+      <input class="vTextField" size="10" type="date">
+    </div>
+  </div>
+
+  <div class="panels">
+  </div>
+  <div class="control">
+    <a class="addlink add-rule"><span class="recurrence-label">{% trans "Add rule" %}</span></a>
+    <a class="addlink add-date"><span class="recurrence-label">{% trans "Add date" %}</span></a>
+  </div>
+</div>
+
+</div>

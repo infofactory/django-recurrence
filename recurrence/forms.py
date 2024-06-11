@@ -1,42 +1,51 @@
 from django import forms, urls
 from django.conf import settings
+from django.utils.safestring import mark_safe
 from django.views import i18n
 from django.utils.translation import gettext_lazy as _
 from django.contrib.staticfiles.storage import staticfiles_storage
+from datetime import datetime
 
 import recurrence
 from recurrence import exceptions
 
 
 class RecurrenceWidget(forms.Textarea):
+    template_name = "recurrence/recurrence_widget.html"
 
-    def __init__(self, attrs=None, **kwargs):
-        self.js_widget_options = kwargs
-        defaults = {'class': 'recurrence-widget'}
-        if attrs is not None:
-            defaults.update(attrs)
-        super().__init__(defaults)
+    def render(self, name, value, attrs = None, renderer = None):
+        output = super().render(name, value, attrs, renderer)
+        if attrs.get('id'):
+            # Initialize the widget
+            output += """<script>initRecurrenceWidget("{name}");</script>""".format(
+                name=attrs.get('id')
+            )
+        return mark_safe(output)
+
+    def get_context(self, name, value, attrs):
+        context = super().get_context(name, value, attrs)
+
+        context["display"] = {
+            "months": [datetime(1990, i, 1) for i in range(1, 13)],
+            "weekdays": [datetime(1990, 1, i) for i in range(1, 8)],
+            "monthdays": list(range(1, 32)),
+            "last_monthdays": list(range(-4, 0)),
+        }
+        return context
 
     def get_media(self):
-        extra = '' if settings.DEBUG else '.min'
         js = [
-            'admin/js/vendor/jquery/jquery%s.js' % extra,
-            'admin/js/jquery.init.js',
-            staticfiles_storage.url('recurrence/js/recurrence.js'),
-            staticfiles_storage.url('recurrence/js/recurrence-widget.js'),
-            staticfiles_storage.url('recurrence/js/recurrence-widget.init.js'),
+            staticfiles_storage.url("recurrence/js/recurrence.js"),
+            staticfiles_storage.url("recurrence/js/recurrence-widget.js"),
+            staticfiles_storage.url("recurrence/js/recurrence-widget.init.js"),
         ]
-        i18n_media = find_recurrence_i18n_js_catalog()
-        if i18n_media:
-            js.insert(0, i18n_media)
-
         return forms.Media(
-            js=js, css={
-                'all': (
-                    staticfiles_storage.url('recurrence/css/recurrence.css'),
-                ),
+            js=js,
+            css={
+                "all": (staticfiles_storage.url("recurrence/css/recurrence.css"),),
             },
         )
+
     media = property(get_media)
 
 
@@ -46,27 +55,34 @@ class RecurrenceField(forms.CharField):
 
     Values are deserialized into `recurrence.base.Recurrence` objects.
     """
+
     widget = RecurrenceWidget
     default_error_messages = {
-        'invalid_frequency': _(
-            u'Invalid frequency.'),
-        'max_rrules_exceeded': _(
-            u'Max rules exceeded. The limit is %(limit)s'),
-        'max_exrules_exceeded': _(
-            u'Max exclusion rules exceeded. The limit is %(limit)s'),
-        'max_rdates_exceeded': _(
-            u'Max dates exceeded. The limit is %(limit)s'),
-        'max_exdates_exceeded': _(
-            u'Max exclusion dates exceeded. The limit is %(limit)s'),
-        'recurrence_required': _(
-            u'This field is required. Set either a recurrence rule or date.'),
+        "invalid_frequency": _("Invalid frequency."),
+        "max_rrules_exceeded": _("Max rules exceeded. The limit is %(limit)s"),
+        "max_exrules_exceeded": _(
+            "Max exclusion rules exceeded. The limit is %(limit)s"
+        ),
+        "max_rdates_exceeded": _("Max dates exceeded. The limit is %(limit)s"),
+        "max_exdates_exceeded": _(
+            "Max exclusion dates exceeded. The limit is %(limit)s"
+        ),
+        "recurrence_required": _(
+            "This field is required. Set either a recurrence rule or date."
+        ),
     }
 
     def __init__(
         self,
-        frequencies=None, accept_dtstart=True, accept_dtend=True,
-        max_rrules=None, max_exrules=None, max_rdates=None, max_exdates=None,
-        *args, **kwargs
+        frequencies=None,
+        accept_dtstart=True,
+        accept_dtend=True,
+        max_rrules=None,
+        max_exrules=None,
+        max_rdates=None,
+        max_exdates=None,
+        *args,
+        **kwargs
     ):
         """
         Create a recurrence field.
@@ -112,9 +128,12 @@ class RecurrenceField(forms.CharField):
             self.frequencies = frequencies
         else:
             self.frequencies = (
-                recurrence.YEARLY, recurrence.MONTHLY,
-                recurrence.WEEKLY, recurrence.DAILY,
-                recurrence.HOURLY, recurrence.MINUTELY,
+                recurrence.YEARLY,
+                recurrence.MONTHLY,
+                recurrence.WEEKLY,
+                recurrence.DAILY,
+                recurrence.HOURLY,
+                recurrence.MINUTELY,
                 recurrence.SECONDLY,
             )
         super().__init__(*args, **kwargs)
@@ -139,46 +158,43 @@ class RecurrenceField(forms.CharField):
         if self.max_rrules is not None:
             if len(recurrence_obj.rrules) > self.max_rrules:
                 raise forms.ValidationError(
-                    self.error_messages['max_rrules_exceeded'] % {
-                        'limit': self.max_rrules
-                    }
+                    self.error_messages["max_rrules_exceeded"]
+                    % {"limit": self.max_rrules}
                 )
         if self.max_exrules is not None:
             if len(recurrence_obj.exrules) > self.max_exrules:
                 raise forms.ValidationError(
-                    self.error_messages['max_exrules_exceeded'] % {
-                        'limit': self.max_exrules
-                    }
+                    self.error_messages["max_exrules_exceeded"]
+                    % {"limit": self.max_exrules}
                 )
         if self.max_rdates is not None:
             if len(recurrence_obj.rdates) > self.max_rdates:
                 raise forms.ValidationError(
-                    self.error_messages['max_rdates_exceeded'] % {
-                        'limit': self.max_rdates
-                    }
+                    self.error_messages["max_rdates_exceeded"]
+                    % {"limit": self.max_rdates}
                 )
         if self.max_exdates is not None:
             if len(recurrence_obj.exdates) > self.max_exdates:
                 raise forms.ValidationError(
-                    self.error_messages['max_exdates_exceeded'] % {
-                        'limit': self.max_exdates
-                    }
+                    self.error_messages["max_exdates_exceeded"]
+                    % {"limit": self.max_exdates}
                 )
 
         for rrule in recurrence_obj.rrules:
             if rrule.freq not in self.frequencies:
-                raise forms.ValidationError(
-                    self.error_messages['invalid_frequency'])
+                raise forms.ValidationError(self.error_messages["invalid_frequency"])
         for exrule in recurrence_obj.exrules:
             if exrule.freq not in self.frequencies:
-                raise forms.ValidationError(
-                    self.error_messages['invalid_frequency'])
+                raise forms.ValidationError(self.error_messages["invalid_frequency"])
 
         if self.required:
-            if not recurrence_obj.rrules and not recurrence_obj.rdates and not recurrence_obj.exdates and not recurrence_obj.exrules:
-                raise forms.ValidationError(
-                    self.error_messages['recurrence_required']
-                )
+            if (
+                not recurrence_obj.rrules
+                and not recurrence_obj.rdates
+                and not recurrence_obj.exdates
+                and not recurrence_obj.exrules
+            ):
+                raise forms.ValidationError(self.error_messages["recurrence_required"])
 
         return recurrence_obj
 
@@ -193,10 +209,11 @@ def find_recurrence_i18n_js_catalog():
         return _recurrence_javascript_catalog_url
 
     # first try to use the dynamic form of the javascript_catalog view
-    if hasattr(i18n, 'javascript_catalog'):
+    if hasattr(i18n, "javascript_catalog"):
         try:
             return urls.reverse(
-                i18n.javascript_catalog, kwargs={'packages': 'recurrence'})
+                i18n.javascript_catalog, kwargs={"packages": "recurrence"}
+            )
         except urls.NoReverseMatch:
             pass
 
@@ -204,18 +221,21 @@ def find_recurrence_i18n_js_catalog():
     # that manually selects recurrence as one of the packages to include
     def check_urlpatterns(urlpatterns):
         for pattern in urlpatterns:
-            if hasattr(pattern, 'url_patterns'):
+            if hasattr(pattern, "url_patterns"):
                 match = check_urlpatterns(pattern.url_patterns)
                 if match:
                     return match
-            elif (hasattr(i18n, 'javascript_catalog') and pattern.callback == i18n.javascript_catalog and
-                  'recurrence' in pattern.default_args.get('packages', [])):
+            elif (
+                hasattr(i18n, "javascript_catalog")
+                and pattern.callback == i18n.javascript_catalog
+                and "recurrence" in pattern.default_args.get("packages", [])
+            ):
                 if pattern.name:
                     return urls.reverse(pattern.name)
                 else:
                     return urls.reverse(pattern.callback)
 
-    root_urlconf = __import__(settings.ROOT_URLCONF, {}, {}, [''])
+    root_urlconf = __import__(settings.ROOT_URLCONF, {}, {}, [""])
     url = check_urlpatterns(root_urlconf.urlpatterns)
     # cache it for subsequent use
     _recurrence_javascript_catalog_url = url
