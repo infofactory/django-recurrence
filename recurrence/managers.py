@@ -76,24 +76,3 @@ class RecurrenceManager(manager.Manager):
 
         return recurrence.Recurrence(
             dtstart, dtend, rrules, exrules, rdates, exdates)
-
-    def create_from_recurrence_object(self, recurrence_obj):
-        from recurrence import models
-
-        recurrence_model = self.create(
-            dtstart=to_utc(recurrence_obj.dtstart),
-            dtend=to_utc(recurrence_obj.dtend))
-
-        for rrule in recurrence_obj.rrules:
-            models.Rule.objects.create_from_rule_object(
-                choices.INCLUSION, rrule, recurrence_model)
-        for exrule in recurrence_obj.exrules:
-            models.Rule.objects.create_from_rule_object(
-                choices.EXCLUSION, exrule, recurrence_model)
-
-        for dt in recurrence_obj.rdates:
-            recurrence_model.dates.create(mode=choices.INCLUSION, dt=to_utc(dt))
-        for dt in recurrence_obj.exdates:
-            recurrence_model.dates.create(mode=choices.EXCLUSION, dt=to_utc(dt))
-
-        return recurrence_model
