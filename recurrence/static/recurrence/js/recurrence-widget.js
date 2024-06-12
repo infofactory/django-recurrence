@@ -524,11 +524,11 @@ recurrence.widget.RuleYearlyForm.prototype = {
 
     // by weekday checkbox
     const byday_container = root.querySelector('.byday');
-    const byday_checkbox = byday_container.querySelector('input');
+    const byday_checkbox = byday_container.querySelector('input[name="yearly"][value="byday"]');
 
     // weekday-position
-    const position_select = byday_container.querySelector('select');
-    const weekday_select = byday_container.querySelector('select');
+    const position_select = byday_container.querySelector('select[name="position"]');
+    const weekday_select = byday_container.querySelector('select[name="weekday"]');
 
     if (this.rule.byday.length) {
       if (form.rule.bysetpos.length) {
