@@ -1,46 +1,47 @@
 from django.utils.translation import gettext_lazy as _
+from django.utils import dates
 
 import recurrence
 
 
 FREQUENCY_CHOICES = (
-    (recurrence.SECONDLY, _('Secondly')),
-    (recurrence.MINUTELY, _('Minutely')),
-    (recurrence.HOURLY, _('Hourly')),
-    (recurrence.DAILY, _('Daily')),
-    (recurrence.WEEKLY, _('Weekly')),
-    (recurrence.MONTHLY, _('Monthly')),
-    (recurrence.YEARLY, _('Yearly')),
+    (recurrence.SECONDLY, _('secondly').capitalize()),
+    (recurrence.MINUTELY, _('minutely').capitalize()),
+    (recurrence.HOURLY, _('hourly').capitalize()),
+    (recurrence.DAILY, _('daily').capitalize()),
+    (recurrence.WEEKLY, _('weekly').capitalize()),
+    (recurrence.MONTHLY, _('monthly').capitalize()),
+    (recurrence.YEARLY, _('annually').capitalize()),
 )
 
 WEEKDAY_CHOICES = (
-    (recurrence.MONDAY, _('Monday')),
-    (recurrence.TUESDAY, _('Tuesday')),
-    (recurrence.WEDNESDAY, _('Wednesday')),
-    (recurrence.THURSDAY, _('Thursday')),
-    (recurrence.FRIDAY, _('Friday')),
-    (recurrence.SATURDAY, _('Saturday')),
-    (recurrence.SUNDAY, _('Sunday')),
+    (recurrence.MONDAY, dates.WEEKDAYS[recurrence.MONDAY.number]),
+    (recurrence.TUESDAY, dates.WEEKDAYS[recurrence.TUESDAY.number]),
+    (recurrence.WEDNESDAY, dates.WEEKDAYS[recurrence.WEDNESDAY.number]),
+    (recurrence.THURSDAY, dates.WEEKDAYS[recurrence.THURSDAY.number]),
+    (recurrence.FRIDAY, dates.WEEKDAYS[recurrence.FRIDAY.number]),
+    (recurrence.SATURDAY, dates.WEEKDAYS[recurrence.SATURDAY.number]),
+    (recurrence.SUNDAY, dates.WEEKDAYS[recurrence.SUNDAY.number]),
 )
 
 MONTH_CHOICES = (
-    (recurrence.JANUARY, _('January')),
-    (recurrence.FEBRUARY, _('February')),
-    (recurrence.MARCH, _('March')),
-    (recurrence.APRIL, _('April')),
-    (recurrence.MAY, _('May')),
-    (recurrence.JUNE, _('June')),
-    (recurrence.JULY, _('July')),
-    (recurrence.AUGUST, _('August')),
-    (recurrence.SEPTEMBER, _('September')),
-    (recurrence.OCTOBER, _('October')),
-    (recurrence.NOVEMBER, _('November')),
-    (recurrence.DECEMBER, _('December')),
+    (recurrence.JANUARY, dates.MONTHS[recurrence.JANUARY]),
+    (recurrence.FEBRUARY, dates.MONTHS[recurrence.FEBRUARY]),
+    (recurrence.MARCH, dates.MONTHS[recurrence.MARCH]),
+    (recurrence.APRIL, dates.MONTHS[recurrence.APRIL]),
+    (recurrence.MAY, dates.MONTHS[recurrence.MAY]),
+    (recurrence.JUNE, dates.MONTHS[recurrence.JUNE]),
+    (recurrence.JULY, dates.MONTHS[recurrence.JULY]),
+    (recurrence.AUGUST, dates.MONTHS[recurrence.AUGUST]),
+    (recurrence.SEPTEMBER, dates.MONTHS[recurrence.SEPTEMBER]),
+    (recurrence.OCTOBER, dates.MONTHS[recurrence.OCTOBER]),
+    (recurrence.NOVEMBER, dates.MONTHS[recurrence.NOVEMBER]),
+    (recurrence.DECEMBER, dates.MONTHS[recurrence.DECEMBER]),
 )
 
 EXCLUSION = False
 INCLUSION = True
 MODE_CHOICES = (
-    (INCLUSION, _('Inclusion')),
-    (EXCLUSION, _('Exclusion')),
+    (INCLUSION, _('including').capitalize()),
+    (EXCLUSION, _('excluding').capitalize()),
 )

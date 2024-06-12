@@ -134,7 +134,10 @@
       <span class="recurrence-label">{% trans "Exclude these occurences" %}</span>
     </div>
     <div class="interval">
-      <span class="recurrence-label">{% trans "Every" %}</span>
+      <span class="recurrence-label">
+        {% blocktrans trimmed asvar every_label with number='' freq='' %}every {{ number }} {{ freq }}{% endblocktrans %}
+        {{ every_label.strip.capitalize }}:
+      </span>
       <input name="interval" type="number" size="4" value="1" min="1">
       <select name="freq">
         <option value="0" data-singular="{% trans "year" %}" data-plural="{% trans "years" %}">{% trans "year" %}</option>
@@ -162,16 +165,40 @@
         </div>
         <div class="byday">
           <input class="checkbox" type="checkbox" name="yearly" value="byday">
-          <span class="recurrence-label">{% trans "On the:" %}</span>
+          <span class="recurrence-label">
+            {% blocktrans trimmed asvar on_the_label with items='' %}on the {{ items }}{% endblocktrans %}
+            {{ on_the_label.strip.capitalize }}:
+          </span>
           <div class="section">
             <select name="position">
-              <option value="1">{% trans "first" %}</option>
-              <option value="2">{% trans "second" %}</option>
-              <option value="3">{% trans "third" %}</option>
-              <option value="4">{% trans "fourth" %}</option>
-              <option value="-1">{% trans "last" %}</option>
-              <option value="-2">{% trans "second last" %}</option>
-              <option value="-3">{% trans "third last" %}</option>
+              <option value="1">
+                {% blocktrans trimmed asvar position_label with weekday='' %}first {{ weekday }}{% endblocktrans %}
+                {{ position_label.strip }}
+              </option>
+              <option value="2">
+                {% blocktrans trimmed asvar position_label with weekday='' %}second {{ weekday }}{% endblocktrans %}
+                {{ position_label.strip }}
+              </option>
+              <option value="3">
+                {% blocktrans trimmed asvar position_label with weekday='' %}third {{ weekday }}{% endblocktrans %}
+                {{ position_label.strip }}
+              </option>
+              <option value="4">
+                {% blocktrans trimmed asvar position_label with weekday='' %}fourth {{ weekday }}{% endblocktrans %}
+                {{ position_label.strip }}
+              </option>
+              <option value="-1">
+                {% blocktrans trimmed asvar position_label with weekday='' %}last {{ weekday }}{% endblocktrans %}
+                {{ position_label.strip }}
+              </option>
+              <option value="-2">
+                {% blocktrans trimmed asvar position_label with weekday='' %}second last {{ weekday }}{% endblocktrans %}
+                {{ position_label.strip }}
+              </option>
+              <option value="-3">
+                {% blocktrans trimmed asvar position_label with weekday='' %}third last {{ weekday }}{% endblocktrans %}
+                {{ position_label.strip }}
+              </option>
             </select>
             <select name="weekday">
               {% for weekday in display.weekdays %}
@@ -184,7 +211,10 @@
       <div class="monthly-form hidden">
         <div class="monthday">
           <input class="radio" type="radio" name="monthly" value="monthday">
-          <span class="recurrence-label">{% trans "Each:" %}</span>
+          <span class="recurrence-label">
+            {% blocktrans trimmed asvar every_label with number='' freq='' %}every {{ number }} {{ freq }}{% endblocktrans %}
+            {{ every_label.strip.capitalize }}:
+          </span>
           <div class="section">
             <table class="grid" cellpadding="0" cellspacing="0" border="0">
               <tbody>
@@ -203,16 +233,40 @@
         </div>
         <div class="weekday">
           <input class="radio" type="radio" name="monthly" value="weekday">
-          <span class="recurrence-label">{% trans "On the:" %}</span>
+          <span class="recurrence-label">
+            {% blocktrans trimmed asvar on_the_label with items='' %}on the {{ items }}{% endblocktrans %}
+            {{ on_the_label.strip.capitalize }}:
+          </span>
           <div class="section">
             <select name="position">
-              <option value="1">{% trans "first" %}</option>
-              <option value="2">{% trans "second" %}</option>
-              <option value="3">{% trans "third" %}</option>
-              <option value="4">{% trans "fourth" %}</option>
-              <option value="-1">{% trans "last" %}</option>
-              <option value="-2">{% trans "second last" %}</option>
-              <option value="-3">{% trans "third last" %}</option>
+              <option value="1">
+                {% blocktrans trimmed asvar position_label with weekday='' %}first {{ weekday }}{% endblocktrans %}
+                {{ position_label.strip }}
+              </option>
+              <option value="2">
+                {% blocktrans trimmed asvar position_label with weekday='' %}second {{ weekday }}{% endblocktrans %}
+                {{ position_label.strip }}
+              </option>
+              <option value="3">
+                {% blocktrans trimmed asvar position_label with weekday='' %}third {{ weekday }}{% endblocktrans %}
+                {{ position_label.strip }}
+              </option>
+              <option value="4">
+                {% blocktrans trimmed asvar position_label with weekday='' %}fourth {{ weekday }}{% endblocktrans %}
+                {{ position_label.strip }}
+              </option>
+              <option value="-1">
+                {% blocktrans trimmed asvar position_label with weekday='' %}last {{ weekday }}{% endblocktrans %}
+                {{ position_label.strip }}
+              </option>
+              <option value="-2">
+                {% blocktrans trimmed asvar position_label with weekday='' %}second last {{ weekday }}{% endblocktrans %}
+                {{ position_label.strip }}
+              </option>
+              <option value="-3">
+                {% blocktrans trimmed asvar position_label with weekday='' %}third last {{ weekday }}{% endblocktrans %}
+                {{ position_label.strip }}
+              </option>
             </select>
             <select name="weekday">
               {% for weekday in display.weekdays %}

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-24 23:21+0100\n"
+"POT-Creation-Date: 2024-06-12 13:16+0200\n"
 "PO-Revision-Date: 2017-02-24 23:32+0100\n"
 "Last-Translator: Diego Ponciano <dgo.ponciano@gmail.com>\n"
 "Language-Team: \n"
@@ -17,408 +17,367 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Gtranslator 2.91.7\n"
 
-#: base.py:1087
+#: base.py:1100 choices.py:14 templates/recurrence/recurrence_widget.html:39
 msgid "annually"
 msgstr "anualmente"
 
-#: base.py:1087
+#: base.py:1100 choices.py:13 templates/recurrence/recurrence_widget.html:40
 msgid "monthly"
 msgstr "mensalmente"
 
-#: base.py:1087
+#: base.py:1100 choices.py:12 templates/recurrence/recurrence_widget.html:41
 msgid "weekly"
 msgstr "semanalmente"
 
-#: base.py:1087
+#: base.py:1100 choices.py:11 templates/recurrence/recurrence_widget.html:42
 msgid "daily"
 msgstr "diariamente"
 
-#: base.py:1088
+#: base.py:1101 choices.py:10 templates/recurrence/recurrence_widget.html:43
 msgid "hourly"
 msgstr "a cada hora"
 
-#: base.py:1088
+#: base.py:1101 choices.py:9 templates/recurrence/recurrence_widget.html:44
 msgid "minutely"
 msgstr "a cada minuto"
 
-#: base.py:1088
+#: base.py:1101 choices.py:8 templates/recurrence/recurrence_widget.html:45
 msgid "secondly"
 msgstr "a cada segundo"
 
-#: base.py:1091
+#: base.py:1104 templates/recurrence/recurrence_widget.html:30
+#: templates/recurrence/recurrence_widget.html:143
 msgid "years"
 msgstr "anos"
 
-#: base.py:1091
+#: base.py:1104 templates/recurrence/recurrence_widget.html:31
+#: templates/recurrence/recurrence_widget.html:144
 msgid "months"
 msgstr "meses"
 
-#: base.py:1091
+#: base.py:1104 templates/recurrence/recurrence_widget.html:32
+#: templates/recurrence/recurrence_widget.html:145
 msgid "weeks"
 msgstr "semanas"
 
-#: base.py:1091
+#: base.py:1104 templates/recurrence/recurrence_widget.html:33
+#: templates/recurrence/recurrence_widget.html:146
 msgid "days"
 msgstr "dias"
 
-#: base.py:1092
+#: base.py:1105 templates/recurrence/recurrence_widget.html:34
 msgid "hours"
 msgstr "horas"
 
-#: base.py:1092
+#: base.py:1105 templates/recurrence/recurrence_widget.html:35
 msgid "minutes"
 msgstr "minutos"
 
-#: base.py:1092
+#: base.py:1105 templates/recurrence/recurrence_widget.html:36
 msgid "seconds"
 msgstr "segundos"
 
-#: base.py:1097
+#: base.py:1110 templates/recurrence/recurrence_widget.html:69
 #, python-format
 msgid "1st %(weekday)s"
 msgstr "1º %(weekday)s"
 
-#: base.py:1098
+#: base.py:1111 templates/recurrence/recurrence_widget.html:70
 #, python-format
 msgid "2nd %(weekday)s"
 msgstr "2º %(weekday)s"
 
-#: base.py:1099
+#: base.py:1112 templates/recurrence/recurrence_widget.html:71
 #, python-format
 msgid "3rd %(weekday)s"
 msgstr "3º %(weekday)s"
 
-#: base.py:1100 base.py:1126
+#: base.py:1113 templates/recurrence/recurrence_widget.html:72
+#, python-format
+msgid "4th %(weekday)s"
+msgstr "4° %(weekday)s"
+
+#: base.py:1114 base.py:1134 templates/recurrence/recurrence_widget.html:64
+#: templates/recurrence/recurrence_widget.html:73
+#: templates/recurrence/recurrence_widget.html:191
+#: templates/recurrence/recurrence_widget.html:259
 #, python-format
 msgid "last %(weekday)s"
 msgstr "último %(weekday)s"
 
-#: base.py:1101
+#: base.py:1115 templates/recurrence/recurrence_widget.html:74
 #, python-format
 msgid "2nd last %(weekday)s"
 msgstr "2º último %(weekday)s"
 
-#: base.py:1102
+#: base.py:1116 templates/recurrence/recurrence_widget.html:75
 #, python-format
 msgid "3rd last %(weekday)s"
 msgstr "3º último %(weekday)s"
 
-#: base.py:1105 base.py:1131
+#: base.py:1117
+#, python-format
+msgid "4th last %(weekday)s"
+msgstr "4º último %(weekday)s"
+
+#: base.py:1120 base.py:1140 templates/recurrence/recurrence_widget.html:78
+#: templates/recurrence/recurrence_widget.html:84
 msgid "last"
 msgstr "último"
 
-#: base.py:1106
+#: base.py:1121 templates/recurrence/recurrence_widget.html:85
 msgid "2nd last"
 msgstr "2º último"
 
-#: base.py:1107
+#: base.py:1122 templates/recurrence/recurrence_widget.html:86
 msgid "3rd last"
 msgstr "3º último"
 
-#: base.py:1108
+#: base.py:1123 templates/recurrence/recurrence_widget.html:87
 msgid "4th last"
 msgstr "4º último"
 
-#: base.py:1111
-msgid "Mon"
-msgstr "Seg"
-
-#: base.py:1111
-msgid "Tue"
-msgstr "Ter"
-
-#: base.py:1111
-msgid "Wed"
-msgstr "Qua"
-
-#: base.py:1112
-msgid "Thu"
-msgstr "Qui"
-
-#: base.py:1112
-msgid "Fri"
-msgstr "Sex"
-
-#: base.py:1112
-msgid "Sat"
-msgstr "Sáb"
-
-#: base.py:1112
-msgid "Sun"
-msgstr "Dom"
-
-#: base.py:1115
-msgid "Jan"
-msgstr "Jan"
-
-#: base.py:1115
-msgid "Feb"
-msgstr "Fev"
-
-#: base.py:1115
-msgid "Mar"
-msgstr "Mar"
-
-#: base.py:1115
-msgid "Apr"
-msgstr "Abr"
-
-#: base.py:1116
-msgid "Jun"
-msgstr "Jun"
-
-#: base.py:1116
-msgid "Jul"
-msgstr "Jul"
-
-#: base.py:1116
-msgid "Aug"
-msgstr "Ago"
-
-#: base.py:1117
-msgid "Sep"
-msgstr "Set"
-
-#: base.py:1117
-msgid "Oct"
-msgstr "Out"
-
-#: base.py:1117
-msgid "Nov"
-msgstr "Nov"
-
-#: base.py:1117
-msgid "Dec"
-msgstr "Dez"
-
-#: base.py:1122
+#: base.py:1130 templates/recurrence/recurrence_widget.html:60
+#: templates/recurrence/recurrence_widget.html:175
+#: templates/recurrence/recurrence_widget.html:243
 #, python-format
 msgid "first %(weekday)s"
 msgstr "primeiro %(weekday)s"
 
-#: base.py:1123
+#: base.py:1131 templates/recurrence/recurrence_widget.html:61
+#: templates/recurrence/recurrence_widget.html:179
+#: templates/recurrence/recurrence_widget.html:247
 #, python-format
 msgid "second %(weekday)s"
 msgstr "segundo %(weekday)s"
 
-#: base.py:1124
+#: base.py:1132 templates/recurrence/recurrence_widget.html:62
+#: templates/recurrence/recurrence_widget.html:183
+#: templates/recurrence/recurrence_widget.html:251
 #, python-format
 msgid "third %(weekday)s"
 msgstr "terceiro %(weekday)s"
 
-#: base.py:1125
+#: base.py:1133 templates/recurrence/recurrence_widget.html:63
+#: templates/recurrence/recurrence_widget.html:187
+#: templates/recurrence/recurrence_widget.html:255
 #, python-format
 msgid "fourth %(weekday)s"
 msgstr "quarto %(weekday)s"
 
-#: base.py:1127
+#: base.py:1135 templates/recurrence/recurrence_widget.html:65
+#: templates/recurrence/recurrence_widget.html:195
+#: templates/recurrence/recurrence_widget.html:263
 #, python-format
 msgid "second last %(weekday)s"
 msgstr "penúltimo %(weekday)s"
 
-#: base.py:1128
+#: base.py:1136 templates/recurrence/recurrence_widget.html:66
+#: templates/recurrence/recurrence_widget.html:199
+#: templates/recurrence/recurrence_widget.html:267
 #, python-format
 msgid "third last %(weekday)s"
 msgstr "antepenúltimo %(weekday)s"
 
-#: base.py:1132
+#: base.py:1137
+#, python-format
+msgid "fourth last %(weekday)s"
+msgstr "quarto último %(weekday)s"
+
+#: base.py:1141 templates/recurrence/recurrence_widget.html:79
 msgid "second last"
 msgstr "penúltimo"
 
-#: base.py:1133
+#: base.py:1142 templates/recurrence/recurrence_widget.html:80
 msgid "third last"
 msgstr "antepenúltimo"
 
-#: base.py:1134
+#: base.py:1143 templates/recurrence/recurrence_widget.html:81
 msgid "fourth last"
 msgstr "quarto último"
 
-#: base.py:1137 choices.py:17
-msgid "Monday"
-msgstr "Segunda"
-
-#: base.py:1137 choices.py:18
-msgid "Tuesday"
-msgstr "Terça"
-
-#: base.py:1137 choices.py:19
-msgid "Wednesday"
-msgstr "Quarta"
-
-#: base.py:1138 choices.py:20
-msgid "Thursday"
-msgstr "Quinta"
-
-#: base.py:1138 choices.py:21
-msgid "Friday"
-msgstr "Sexta"
-
-#: base.py:1138 choices.py:22
-msgid "Saturday"
-msgstr "Sábado"
-
-#: base.py:1138 choices.py:23
-msgid "Sunday"
-msgstr "Domingo"
-
-#: base.py:1141 choices.py:27
-msgid "January"
-msgstr "Janeiro"
-
-#: base.py:1141 choices.py:28
-msgid "February"
-msgstr "Fevereiro"
-
-#: base.py:1141 choices.py:29
-msgid "March"
-msgstr "Março"
-
-#: base.py:1141 choices.py:30
-msgid "April"
-msgstr "Abril"
-
-#: base.py:1142 choices.py:32
-msgid "June"
-msgstr "Junho"
-
-#: base.py:1142 choices.py:33
-msgid "July"
-msgstr "Julho"
-
-#: base.py:1142 choices.py:34
-msgid "August"
-msgstr "Agosto"
-
-#: base.py:1143 choices.py:35
-msgid "September"
-msgstr "Setembro"
-
-#: base.py:1143 choices.py:36
-msgid "October"
-msgstr "Outubro"
-
-#: base.py:1143 choices.py:37
-msgid "November"
-msgstr "Novembro"
-
-#: base.py:1143 choices.py:38
-msgid "December"
-msgstr "Dezembro"
-
-#: base.py:1161 base.py:1178 base.py:1189 base.py:1202 base.py:1220
+#: base.py:1163 base.py:1180 base.py:1191 base.py:1204 base.py:1222
 msgid ", "
 msgstr ","
 
-#: base.py:1167
+#: base.py:1169 templates/recurrence/recurrence_widget.html:14
+#: templates/recurrence/recurrence_widget.html:138
+#: templates/recurrence/recurrence_widget.html:215
 #, python-format
 msgid "every %(number)s %(freq)s"
 msgstr "a cada %(number)s %(freq)s"
 
-#: base.py:1181 base.py:1205
+#: base.py:1183 base.py:1207 templates/recurrence/recurrence_widget.html:15
 #, python-format
 msgid "each %(items)s"
 msgstr "cada %(items)s"
 
-#: base.py:1184 base.py:1193 base.py:1197
+#: base.py:1186 base.py:1195 base.py:1199
+#: templates/recurrence/recurrence_widget.html:13
+#: templates/recurrence/recurrence_widget.html:169
+#: templates/recurrence/recurrence_widget.html:237
 #, python-format
 msgid "on the %(items)s"
 msgstr "nos %(items)s"
 
-#: base.py:1212
+#: base.py:1214
 msgid "occuring once"
 msgstr "que ocorre uma vez"
 
-#: base.py:1214
+#: base.py:1216 templates/recurrence/recurrence_widget.html:17
 #, python-format
 msgid "occuring %(number)s times"
 msgstr "que ocorre %(number)s vezes"
 
-#: base.py:1217
+#: base.py:1219 templates/recurrence/recurrence_widget.html:18
 #, python-format
 msgid "until %(date)s"
 msgstr "até %(date)s"
 
-#: choices.py:7
-msgid "Secondly"
-msgstr "A cada segundo"
+#: choices.py:45 templates/recurrence/recurrence_widget.html:110
+msgid "including"
+msgstr "incluindo"
 
-#: choices.py:8
-msgid "Minutely"
-msgstr "A cada minuto"
+#: choices.py:46 templates/recurrence/recurrence_widget.html:111
+msgid "excluding"
+msgstr "excluindo"
 
-#: choices.py:9
-msgid "Hourly"
-msgstr "A cada hora"
-
-#: choices.py:10
-msgid "Daily"
-msgstr "Diariamente"
-
-#: choices.py:11
-msgid "Weekly"
-msgstr "Semanalmente"
-
-#: choices.py:12
-msgid "Monthly"
-msgstr "Mensalmente"
-
-#: choices.py:13
-msgid "Yearly"
-msgstr "Anualmente"
-
-#: choices.py:31
-msgid "May"
-msgstr "Mai"
-
-#: choices.py:44
-msgid "Inclusion"
-msgstr "Inclusão"
-
-#: choices.py:45
-msgid "Exclusion"
-msgstr "Exclusão"
-
-#: forms.py:72
+#: forms.py:61
 msgid "Invalid frequency."
 msgstr "Freqência inválida."
 
-#: forms.py:74
+#: forms.py:62
 #, python-format
 msgid "Max rules exceeded. The limit is %(limit)s"
 msgstr "Máximo de regras excedido. O limite é %(limit)s"
 
-#: forms.py:76
+#: forms.py:64
 #, python-format
 msgid "Max exclusion rules exceeded. The limit is %(limit)s"
 msgstr "Máximo de regras de exclusão excedido. O limite é %(limit)s"
 
-#: forms.py:78
+#: forms.py:66
 #, python-format
 msgid "Max dates exceeded. The limit is %(limit)s"
 msgstr "Máximo de datas excedido. O limite é %(limit)s"
 
-#: forms.py:80
+#: forms.py:68
 #, python-format
 msgid "Max exclusion dates exceeded. The limit is %(limit)s"
 msgstr "Máximo de datas excluídas excedido. O limite é %(limit)s"
 
-#~ msgid "year"
-#~ msgstr "ano"
+#: forms.py:71
+msgid "This field is required. Set either a recurrence rule or date."
+msgstr ""
 
-#~ msgid "month"
-#~ msgstr "mês"
+#: templates/recurrence/recurrence_widget.html:11
+msgid "midnight"
+msgstr "meia-noite"
 
-#~ msgid "week"
-#~ msgstr "semana"
+#: templates/recurrence/recurrence_widget.html:12
+msgid "noon"
+msgstr "meio-dia"
 
-#~ msgid "day"
-#~ msgstr "dia"
+#: templates/recurrence/recurrence_widget.html:16
+#, python-format
+msgid "occuring %(number)s time"
+msgstr "ocorrendo %(number)s vez"
 
-#~ msgid "hour"
-#~ msgstr "hora"
+#: templates/recurrence/recurrence_widget.html:21
+#: templates/recurrence/recurrence_widget.html:143
+msgid "year"
+msgstr "ano"
 
-#~ msgid "minute"
-#~ msgstr "minuto"
+#: templates/recurrence/recurrence_widget.html:22
+#: templates/recurrence/recurrence_widget.html:144
+msgid "month"
+msgstr "mês"
 
-#~ msgid "second"
-#~ msgstr "segundo"
+#: templates/recurrence/recurrence_widget.html:23
+#: templates/recurrence/recurrence_widget.html:145
+msgid "week"
+msgstr "semana"
+
+#: templates/recurrence/recurrence_widget.html:24
+#: templates/recurrence/recurrence_widget.html:146
+msgid "day"
+msgstr "dia"
+
+#: templates/recurrence/recurrence_widget.html:25
+msgid "hour"
+msgstr "hora"
+
+#: templates/recurrence/recurrence_widget.html:26
+msgid "minute"
+msgstr "minuto"
+
+#: templates/recurrence/recurrence_widget.html:27
+msgid "second"
+msgstr "segundo"
+
+#: templates/recurrence/recurrence_widget.html:102
+msgid "a.m."
+msgstr "a.m."
+
+#: templates/recurrence/recurrence_widget.html:103
+msgid "p.m."
+msgstr "p.m."
+
+#: templates/recurrence/recurrence_widget.html:104
+msgid "AM"
+msgstr "AM"
+
+#: templates/recurrence/recurrence_widget.html:105
+msgid "PM"
+msgstr "PM"
+
+#: templates/recurrence/recurrence_widget.html:107
+#, python-format
+msgctxt "Day of month"
+msgid "%%j%%S"
+msgstr ""
+
+#: templates/recurrence/recurrence_widget.html:108
+#, python-format
+msgctxt "Date format"
+msgid "%%l, %%F %%j, %%Y"
+msgstr ""
+
+#: templates/recurrence/recurrence_widget.html:114
+#, python-format
+msgid "Occurs %(number)s time"
+msgstr "Ocorre %(number)s vez"
+
+#: templates/recurrence/recurrence_widget.html:115
+#, python-format
+msgid "Occurs %(number)s times"
+msgstr "Ocorre %(number)s vezes"
+
+#: templates/recurrence/recurrence_widget.html:124
+msgid "Delete"
+msgstr ""
+
+#: templates/recurrence/recurrence_widget.html:134
+msgid "Exclude these occurences"
+msgstr "Excluir estas ocorrências"
+
+#: templates/recurrence/recurrence_widget.html:290
+msgid "Repeat until"
+msgstr "Repetir até"
+
+#: templates/recurrence/recurrence_widget.html:294
+#: templates/recurrence/recurrence_widget.html:313
+msgid "Date"
+msgstr "Data"
+
+#: templates/recurrence/recurrence_widget.html:310
+msgid "Exclude this date"
+msgstr "Excluir esta data"
+
+#: templates/recurrence/recurrence_widget.html:321
+msgid "Add rule"
+msgstr "Nova regra"
+
+#: templates/recurrence/recurrence_widget.html:322
+msgid "Add date"
+msgstr "Nova data"

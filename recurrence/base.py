@@ -17,6 +17,7 @@ import dateutil.rrule
 from dateutil import tz
 
 from django.utils import dateformat
+from django.utils import dates
 from django.utils.timezone import get_current_timezone, is_aware, is_naive, make_aware
 from django.utils.translation import gettext as _, pgettext as _p
 
@@ -1109,9 +1110,11 @@ def rule_to_text(rule, short=False):
             1: _('1st %(weekday)s'),
             2: _('2nd %(weekday)s'),
             3: _('3rd %(weekday)s'),
+            4: _('4th %(weekday)s'),
             -1: _('last %(weekday)s'),
             -2: _('2nd last %(weekday)s'),
             -3: _('3rd last %(weekday)s'),
+            -4: _('4th last %(weekday)s'),
         }
         last_of_month_display = {
             -1: _('last'),
@@ -1119,15 +1122,8 @@ def rule_to_text(rule, short=False):
             -3: _('3rd last'),
             -4: _('4th last'),
         }
-        weekdays_display = (
-            _('Mon'), _('Tue'), _('Wed'),
-            _('Thu'), _('Fri'), _('Sat'), _('Sun'),
-        )
-        months_display = (
-            _('Jan'), _('Feb'), _('Mar'), _('Apr'),
-            _p('month name', 'May'), _('Jun'), _('Jul'), _('Aug'),
-            _('Sep'), _('Oct'), _('Nov'), _('Dec'),
-        )
+        weekdays_display = list(dates.WEEKDAYS_ABBR.values())
+        months_display = [date.capitalize() for date in dates.MONTHS_3.values()]
 
     else:
         positional_display = {
@@ -1138,6 +1134,7 @@ def rule_to_text(rule, short=False):
             -1: _('last %(weekday)s'),
             -2: _('second last %(weekday)s'),
             -3: _('third last %(weekday)s'),
+            -4: _('fourth last %(weekday)s'),
         }
         last_of_month_display = {
             -1: _('last'),
@@ -1145,15 +1142,8 @@ def rule_to_text(rule, short=False):
             -3: _('third last'),
             -4: _('fourth last'),
         }
-        weekdays_display = (
-            _('Monday'), _('Tuesday'), _('Wednesday'),
-            _('Thursday'), _('Friday'), _('Saturday'), _('Sunday'),
-        )
-        months_display = (
-            _('January'), _('February'), _('March'), _('April'),
-            _p('month name', 'May'), _('June'), _('July'), _('August'),
-            _('September'), _('October'), _('November'), _('December'),
-        )
+        weekdays_display = list(dates.WEEKDAYS.values())
+        months_display = list(dates.MONTHS.values())
 
     def get_positional_weekdays(rule):
         items = []
