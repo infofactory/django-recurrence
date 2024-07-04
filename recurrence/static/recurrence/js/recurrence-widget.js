@@ -379,7 +379,7 @@ recurrence.widget.RuleForm.prototype = {
   },
 
   get_display_text: function() {
-    const text = this.freq_rules[this.selected_freq].get_display_text();
+    let text = this.freq_rules[this.selected_freq].get_display_text();
     if (this.mode == recurrence.widget.EXCLUSION)
       text = recurrence.display.mode.exclusion + ' ' + text;
     return recurrence.string.capitalize(text);
@@ -454,26 +454,25 @@ recurrence.widget.RuleForm.prototype = {
   },
 
   set_mode: function(mode) {
-    if (this.mode != mode) {
-      if (this.mode == recurrence.widget.INCLUSION) {
-        recurrence.array.remove(
-          this.panel.widget.data.rrules, this.rule);
-        this.panel.widget.data.exrules.push(this.rule);
-        recurrence.widget.remove_class(
-          this.panel.elements.root, 'inclusion');
-        recurrence.widget.add_class(
-          this.panel.elements.root, 'exclusion');
-      } else {
-        recurrence.array.remove(
-          this.panel.widget.data.exrules, this.rule);
-        this.panel.widget.data.rrules.push(this.rule);
-          recurrence.widget.remove_class(
-        this.panel.elements.root, 'exclusion');
-          recurrence.widget.add_class(
-        this.panel.elements.root, 'inclusion');
-      }
-      this.mode = mode;
+    if (this.mode == mode) {
+      this.update();
+      return;
     }
+    console.log("MODE CHANGED", mode);
+    if (this.mode == recurrence.widget.INCLUSION) {
+      recurrence.array.remove(
+        this.panel.widget.data.rrules, this.rule);
+      this.panel.widget.data.exrules.push(this.rule);
+      this.panel.elements.root.classList.remove('inclusion');
+      this.panel.elements.root.classList.add('exclusion');
+    } else {
+      recurrence.array.remove(
+        this.panel.widget.data.exrules, this.rule);
+      this.panel.widget.data.rrules.push(this.rule);
+      this.panel.elements.root.classList.remove('exclusion');
+      this.panel.elements.root.classList.add('inclusion');
+    }
+    this.mode = mode;
     this.update();
   },
 
