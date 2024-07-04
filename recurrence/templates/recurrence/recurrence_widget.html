@@ -15,6 +15,7 @@
       "each": "{% blocktrans trimmed with items='%(items)s' %}each {{ items }}{% endblocktrans %}",
       "count": "{% blocktrans trimmed with number='%(number)s' %}occuring {{ number }} time{% endblocktrans %}",
       "count_plural": "{% blocktrans trimmed with number='%(number)s' %}occuring {{ number }} times{% endblocktrans %}",
+      "from": "{% blocktrans trimmed with date='%(date)s' %}from {{ date }}{% endblocktrans %}",
       "until": "{% blocktrans trimmed with date='%(date)s' %}until {{ date }}{% endblocktrans %}"
     },
     "timeintervals": [
@@ -129,6 +130,10 @@
   </div>
 
   <div class="recurrence" data-recurrence-template="rule-form">
+    <div class="dtstart">
+      <span class="recurrence-label">{% trans "Repeat from" %}:</span>
+      <input class="vTextField" size="10" type="date">
+    </div>
     <div class="mode">
       <input class="checkbox" type="checkbox" name="mode">
       <span class="recurrence-label">{% trans "Exclude these occurences" %}</span>

@@ -149,7 +149,7 @@ class Rule:
 
     def __init__(
         self, freq,
-        interval=1, wkst=None, count=None, until=None, **kwargs
+        dtstart=None, interval=1, wkst=None, count=None, until=None, **kwargs
     ):
         """
         Create a new rule.
@@ -158,6 +158,7 @@ class Rule:
         parameter usage.
         """
         self.freq = freq
+        self.dtstart = dtstart
         self.interval = interval
         self.wkst = wkst
         self.count = count
@@ -184,7 +185,7 @@ class Rule:
             byparam_values.append(param)
             byparam_values.extend(getattr(self, param, []) or [])
         return hash((
-            self.freq, self.interval, self.wkst, self.count, self.until,
+            self.freq, self.dtstart, self.interval, self.wkst, self.count, self.until,
             tuple(byparam_values)))
 
     def __eq__(self, other):
@@ -227,9 +228,17 @@ class Rule:
         # the parameter name originally specified by rfc2445.
         kwargs['byweekday'] = kwargs.pop('byday')
 
+        this_dtstart = self.dtstart
+        if this_dtstart:
+            this_dtstart = normalize_offset_awareness(this_dtstart, dtstart)
+            if dtstart and this_dtstart > dtstart:
+                this_dtstart = dtstart
+        elif dtstart:
+            this_dtstart = dtstart
+
         until = self.until
         if until:
-            until = normalize_offset_awareness(until, dtstart)
+            until = normalize_offset_awareness(until, this_dtstart)
             if dtend:
                 if until > dtend:
                     until = dtend
@@ -237,7 +246,7 @@ class Rule:
             until = dtend
 
         return dateutil.rrule.rrule(
-            self.freq, dtstart, self.interval, self.wkst, self.count, until,
+            self.freq, this_dtstart, self.interval, self.wkst, self.count, until,
             cache=cache, **kwargs)
 
 
@@ -750,6 +759,16 @@ def validate(rule_or_recurrence):
             raise exceptions.ValidationError(
                 'invalid freq parameter: %r' % rule.freq)
 
+        # validate dtstart
+        if rule.dtstart:
+            try:
+                validate_dt(rule.dtstart)
+            except ValueError:
+                # TODO: I'm not sure it's possible to get here
+                # (validate_dt doesn't raise ValueError)
+                raise exceptions.ValidationError(
+                    'invalid dtstart parameter: %r' % rule.until)
+
         # validate interval
         try:
             interval = int(rule.interval)
@@ -854,6 +873,9 @@ def serialize(rule_or_recurrence):
     def serialize_rule(rule):
         values = []
         values.append((u'FREQ', [Rule.frequencies[rule.freq]]))
+
+        if rule.dtstart is not None:
+            values.append((u'DTSTART', [serialize_dt(rule.dtstart)]))
 
         if rule.interval != 1:
             values.append((u'INTERVAL', [str(int(rule.interval))]))
@@ -1028,6 +1050,8 @@ def deserialize(text, include_dtstart=True):
                     except ValueError:
                         raise exceptions.DeserializationError(
                             'bad frequency value: %r' % value[0])
+                elif key == u'DTSTART':
+                    kwargs[str(key.lower())] = deserialize_dt(value[0])
                 elif key == u'INTERVAL':
                     try:
                         kwargs[str(key.lower())] = int(value[0])
@@ -1209,6 +1233,10 @@ def rule_to_text(rule, short=False):
     # daily freqencies has no additional formatting,
     # hour/minute/second formatting not supported
 
+    if rule.dtstart:
+        parts.append(_('from %(date)s') % {
+            'date': dateformat.format(rule.dtstart, 'Y-m-d')})
+
     if rule.count:
         if rule.count == 1:
             parts.append(_('occuring once'))
@@ -1263,6 +1291,8 @@ def from_dateutil_rrule(rrule):
     kwargs = {}
     kwargs['freq'] = rrule._freq
     kwargs['interval'] = rrule._interval
+    if rrule._dtstart is not None:
+        kwargs['dtstart'] = rrule._dtstart
     if rrule._wkst != 0:
         kwargs['wkst'] = rrule._wkst
     kwargs['bysetpos'] = rrule._bysetpos

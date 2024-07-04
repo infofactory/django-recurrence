@@ -8,6 +8,7 @@ recurrence.Rule.prototype = {
     this.freq = freq;
 
     options = options || {};
+    this.dtstart = options.dtstart || null
     this.interval = options.interval || 1;
     this.wkst = options.wkst || null;
     this.count = options.count || null;
@@ -25,9 +26,12 @@ recurrence.Rule.prototype = {
   },
 
   copy: function () {
+    var dtstart = this.dtstart;
+    if (dtstart) dtstart = new Date(dtstart.valueOf());
     var until = this.until;
     if (until) until = new Date(until.valueOf());
     var rule = new recurrence.Rule(this.freq, this);
+    rule.dtstart = dtstart;
     rule.until = until;
     return rule;
   },
@@ -35,6 +39,7 @@ recurrence.Rule.prototype = {
   update: function (rule) {
     rule = rule.copy();
     this.freq = rule.freq;
+    this.dtstart = rule.dtstart;
     this.interval = rule.interval;
     this.wkst = rule.wkst;
     this.until = rule.until;
@@ -169,6 +174,19 @@ recurrence.Rule.prototype = {
 
     // daily frequencies has no additional formatting,
     // hour/minute/second formatting not supported.
+
+    if (this.dtstart) {
+      parts.push(
+        interpolate(
+          recurrence.display.tokens.from,
+          {
+            date: recurrence.date.format(this.dtstart, '%Y-%m-%d'),
+          },
+          true,
+        ),
+
+      )
+    }
 
     if (this.count) {
       if (this.count == 1)
@@ -554,6 +572,7 @@ recurrence.serialize = function (rule_or_recurrence) {
     var values = [];
 
     values.push(['FREQ', [recurrence.frequencies[rule.freq]]]);
+    if (rule.dtstart != null) values.push(['DTSTART', [serialize_dt(rule.dtstart)]]);
     if (rule.interval != 1) values.push(['INTERVAL', [String(rule.interval)]]);
     if (rule.wkst) values.push(['WKST', [recurrence.weekdays[rule.wkst]]]);
     if (rule.count != null) values.push(['COUNT', [String(rule.count)]]);
@@ -672,6 +691,8 @@ recurrence.deserialize = function (text) {
           if (recurrence.frequencies.indexOf(value[0]) != -1) {
             freq = recurrence.frequencies.indexOf(value[0]);
           }
+        } else if (key == 'DTSTART') {
+          options[param] = deserialize_dt(value[0]);
         } else if (key == 'INTERVAL') {
           options[param] = parseInt(value[0], 10);
         } else if (key == 'WKST') {

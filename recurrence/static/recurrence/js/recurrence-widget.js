@@ -205,6 +205,7 @@ recurrence.widget.RuleForm.prototype = {
     this.options = options || {};
 
     var rule_options = {
+      dtstart: rule.dtstart,
       interval: rule.interval,
       until: rule.until,
       count: rule.count,
@@ -228,6 +229,12 @@ recurrence.widget.RuleForm.prototype = {
     const formTemplate = this.panel.widget.elements.root.querySelector('[data-recurrence-template="rule-form"]');
     const root = formTemplate.cloneNode(true);
     delete root.dataset.recurrenceTemplate;
+
+    // dtstart
+    const dtstart_value = this.rule.dtstart ? recurrence.date.format(this.rule.dtstart, '%Y-%m-%d') : "";
+    const dtstart_container = root.querySelector('.dtstart');
+    const dtstart_date_selector = dtstart_container.querySelector('input[type="date"]');
+    dtstart_date_selector.value = dtstart_value;
 
     // mode
     const mode_container = root.querySelector('.mode');
@@ -274,6 +281,11 @@ recurrence.widget.RuleForm.prototype = {
     const freq_form_container = root.querySelector('.form');
 
     // events
+
+    dtstart_date_selector.onchange = function () {
+      form.set_dtstart(dtstart_date_selector.value);
+    };
+
     mode_checkbox.onclick = function() {
       form.set_mode(this.checked ? recurrence.widget.EXCLUSION : recurrence.widget.INCLUSION);
     };
@@ -347,6 +359,7 @@ recurrence.widget.RuleForm.prototype = {
 
     this.elements = {
       'root': root,
+      'dtstart_date_selector': dtstart_date_selector,
       'mode_checkbox': mode_checkbox,
       'freq_select': freq_select,
       'interval_field': interval_field,
@@ -385,6 +398,15 @@ recurrence.widget.RuleForm.prototype = {
     if (this.mode == recurrence.widget.EXCLUSION)
       text = recurrence.display.mode.exclusion + ' ' + text;
     return recurrence.string.capitalize(text);
+  },
+
+  set_dtstart: function(dtstart) {
+    if (dtstart) dtstart = new Date(dtstart);
+    else dtstart = null;
+    this.freq_rules.forEach(function(rule) {
+      rule.dtstart = dtstart;
+    });
+    this.update();
   },
 
   set_until: function(until) {
