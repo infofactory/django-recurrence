@@ -325,6 +325,7 @@ recurrence.widget.RuleForm.prototype = {
       this.checked = true;
       count_radio.checked = false;
       count_field.disabled = true;
+      until_date_selector.disabled = false;
       form.set_until(until_date_selector.value);
     };
 
