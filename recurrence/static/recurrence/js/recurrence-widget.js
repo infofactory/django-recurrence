@@ -351,6 +351,7 @@ recurrence.widget.RuleForm.prototype = {
       'interval_field': interval_field,
       'freq_form_container': freq_form_container,
       'until_radio': until_radio,
+      'until_date_selector': until_date_selector,
       'count_field': count_field,
       'count_radio': count_radio,
       'limit_checkbox': limit_checkbox
@@ -386,7 +387,12 @@ recurrence.widget.RuleForm.prototype = {
   },
 
   set_until: function(until) {
-    until = new Date(until);
+    if (until) {
+      until = new Date(until);
+    } else {
+      until = recurrence.widget.date_today();
+      this.elements.until_date_selector.value = until.toISOString().split('T')[0];
+    }
     this.freq_rules.forEach(function(rule) {
       rule.count = null;
       rule.until = until;
