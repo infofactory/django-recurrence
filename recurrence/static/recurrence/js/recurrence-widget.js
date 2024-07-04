@@ -853,7 +853,7 @@ recurrence.widget.DateForm.prototype = {
       mode_checkbox.checked = true;
 
     // date
-    const date_container = root.querySelector('.date');
+    const date_container = root.querySelector('.date-value');
     const date_selector = date_container.querySelector('input[type="date"]');
     date_selector.value = recurrence.date.format(this.date, '%Y-%m-%d');
     date_selector.onchange = function() {
