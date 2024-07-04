@@ -230,11 +230,19 @@ recurrence.widget.RuleForm.prototype = {
     const root = formTemplate.cloneNode(true);
     delete root.dataset.recurrenceTemplate;
 
+    const showRRuleStart = form.panel.widget.options.showRRuleStart;
+    const showRRuleEnd = form.panel.widget.options.showRRuleEnd;
+
     // dtstart
-    const dtstart_value = this.rule.dtstart ? recurrence.date.format(this.rule.dtstart, '%Y-%m-%d') : "";
     const dtstart_container = root.querySelector('.dtstart');
-    const dtstart_date_selector = dtstart_container.querySelector('input[type="date"]');
-    dtstart_date_selector.value = dtstart_value;
+    let dtstart_date_selector;
+    if (showRRuleStart) {
+      const dtstart_value = this.rule.dtstart ? recurrence.date.format(this.rule.dtstart, '%Y-%m-%d') : "";
+      dtstart_date_selector = dtstart_container.querySelector('input[type="date"]');
+      dtstart_date_selector.value = dtstart_value;
+    } else {
+      dtstart_container.remove();
+    }
 
     // mode
     const mode_container = root.querySelector('.mode');
@@ -252,29 +260,33 @@ recurrence.widget.RuleForm.prototype = {
 
     // limit container
     const limit_container = root.querySelector('.limit');
-    const limit_checkbox = limit_container.querySelector('input[name="limit"]');
-    const until_count_container = limit_container.querySelector('.until-count');
+    let limit_checkbox, until_date_selector, until_radio, count_radio, count_field;
+    if (showRRuleEnd) {
+      limit_checkbox = limit_container.querySelector('input[name="limit"]');
+      const until_count_container = limit_container.querySelector('.until-count');
 
-    // until
-    const until_value = this.rule.until ? recurrence.date.format(this.rule.until, '%Y-%m-%d') : new Date().toISOString().slice(0, 10);
-    const until_container = until_count_container.querySelector('.until');
-    const until_date_selector = until_count_container.querySelector('input[type="date"]');
-    const until_radio = until_container.querySelector('input[value="until"]');
-    until_date_selector.value = until_value;
+      // until
+      const until_value = this.rule.until ? recurrence.date.format(this.rule.until, '%Y-%m-%d') : new Date().toISOString().slice(0, 10);
+      const until_container = until_count_container.querySelector('.until');
+      until_date_selector = until_count_container.querySelector('input[type="date"]');
+      until_radio = until_container.querySelector('input[value="until"]');
+      until_date_selector.value = until_value;
 
-    // count
-    const count_value = this.rule.count ? this.rule.count : 1;
-    const count_container = until_count_container.querySelector('.count');
-    const count_radio = count_container.querySelector('input[value="count"]');
-    const count_field = count_container.querySelector('input[name="count"]');
+      // count
+      const count_container = until_count_container.querySelector('.count');
+      count_radio = count_container.querySelector('input[value="count"]');
+      count_field = count_container.querySelector('input[name="count"]');
 
-    if (this.rule.until || this.rule.count) {
-      limit_checkbox.checked = true;
+      if (this.rule.until || this.rule.count) {
+        limit_checkbox.checked = true;
+      } else {
+        until_radio.disabled = true;
+        count_radio.disabled = true;
+        until_date_selector.disabled = true;
+        until_count_container.classList.add('disabled');
+      }
     } else {
-      until_radio.disabled = true;
-      count_radio.disabled = true;
-      until_date_selector.disabled = true;
-      until_count_container.classList.add('disabled');
+      limit_container.remove();
     }
 
     // core
@@ -282,7 +294,7 @@ recurrence.widget.RuleForm.prototype = {
 
     // events
 
-    dtstart_date_selector.onchange = function () {
+    if (showRRuleStart) dtstart_date_selector.onchange = function () {
       form.set_dtstart(dtstart_date_selector.value);
     };
 
@@ -298,64 +310,66 @@ recurrence.widget.RuleForm.prototype = {
       form.set_interval(parseInt(this.value), 10);
     };
 
-    limit_checkbox.onclick = function() {
-      if (this.checked) {
-        limit_container.classList.remove('disabled');
-        until_radio.disabled = false;
-        count_radio.disabled = false;
-        if (until_radio.checked) {
-          until_date_selector.disabled = false;
-          form.set_until(until_date_selector.value);
+    if (showRRuleEnd) {
+      limit_checkbox.onclick = function() {
+        if (this.checked) {
+          limit_container.classList.remove('disabled');
+          until_radio.disabled = false;
+          count_radio.disabled = false;
+          if (until_radio.checked) {
+            until_date_selector.disabled = false;
+            form.set_until(until_date_selector.value);
+          }
+          if (count_radio.checked) {
+            count_field.disabled = false;
+            form.set_count(parseInt(count_field.value));
+          }
+        } else {
+          limit_container.classList.add('disabled');
+          until_radio.disabled = true;
+          count_radio.disabled = true;
+          until_date_selector.disabled = true;
+          count_field.disabled = true;
+          form.freq_rules.forEach(function(rule) {
+            rule.until = null;
+            rule.count = null;
+          });
+          form.update();
         }
-        if (count_radio.checked) {
-          count_field.disabled = false;
-          form.set_count(parseInt(count_field.value));
-        }
-      } else {
-        limit_container.classList.add('disabled');
-        until_radio.disabled = true;
-        count_radio.disabled = true;
-        until_date_selector.disabled = true;
-        count_field.disabled = true;
-        form.freq_rules.forEach(function(rule) {
-          rule.until = null;
-          rule.count = null;
-        });
-        form.update();
       }
+
+      if (form.rule.count) {
+        count_radio.checked = true;
+        until_date_selector.disabled = true;
+      } else {
+        until_radio.checked = true;
+        count_field.disabled = true;
+      }
+
+      until_radio.onclick = function () {
+        this.checked = true;
+        count_radio.checked = false;
+        count_field.disabled = true;
+        until_date_selector.disabled = false;
+        form.set_until(until_date_selector.value);
+      };
+
+      count_radio.onclick = function () {
+        this.checked = true;
+        count_field.disabled = false;
+        until_radio.checked = false;
+        until_date_selector.disabled = true;
+        form.set_count(parseInt(count_field.value), 10);
+      };
+
+      count_field.onchange = function () {
+        form.set_count(parseInt(this.value), 10);
+      };
+
+      until_date_selector.onchange = function () {
+        form.set_until(until_date_selector.value);
+      };
     }
-
-    if (form.rule.count) {
-      count_radio.checked = true;
-      until_date_selector.disabled = true;
-    } else {
-      until_radio.checked = true;
-      count_field.disabled = true;
-    }
-
-    until_radio.onclick = function () {
-      this.checked = true;
-      count_radio.checked = false;
-      count_field.disabled = true;
-      until_date_selector.disabled = false;
-      form.set_until(until_date_selector.value);
-    };
-
-    count_radio.onclick = function () {
-      this.checked = true;
-      count_field.disabled = false;
-      until_radio.checked = false;
-      until_date_selector.disabled = true;
-      form.set_count(parseInt(count_field.value), 10);
-    };
-
-    count_field.onchange = function () {
-      form.set_count(parseInt(this.value), 10);
-    };
-
-    until_date_selector.onchange = function () {
-      form.set_until(until_date_selector.value);
-    };
 
     this.elements = {
       'root': root,
@@ -371,7 +385,10 @@ recurrence.widget.RuleForm.prototype = {
       'limit_checkbox': limit_checkbox
     };
 
-    this.update_count_text(count_value);
+    if (showRRuleEnd) {
+      const count_value = this.rule.count ? this.rule.count : 1;
+      this.update_count_text(count_value);
+    }
 
     // freq forms
     const forms = [

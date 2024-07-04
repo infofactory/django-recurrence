@@ -1,3 +1,4 @@
+import json
 from django import forms, urls
 from django.conf import settings
 from django.utils.safestring import mark_safe
@@ -14,11 +15,14 @@ class RecurrenceWidget(forms.Textarea):
     template_name = "recurrence/recurrence_widget.html"
 
     def render(self, name, value, attrs = None, renderer = None):
-        output = super().render(name, value, attrs, renderer)
+        context = self.get_context(name, value, attrs)
+        widget_options = context["widget"]["attrs"].pop("data-recurrence-options")
+        output = self._render(self.template_name, context, renderer)
         if attrs.get('id'):
             # Initialize the widget
-            output += """<script>initRecurrenceWidget("{name}");</script>""".format(
-                name=attrs.get('id')
+            output += """<script>initRecurrenceWidget("{name}", {options});</script>""".format(
+                name=attrs.get('id'),
+                options=widget_options or "{}",
             )
         return mark_safe(output)
 
@@ -81,6 +85,8 @@ class RecurrenceField(forms.CharField):
         max_exrules=None,
         max_rdates=None,
         max_exdates=None,
+        show_rrule_start=False,
+        show_rrule_end=True,
         *args,
         **kwargs
     ):
@@ -124,6 +130,9 @@ class RecurrenceField(forms.CharField):
         self.max_exrules = max_exrules
         self.max_rdates = max_rdates
         self.max_exdates = max_exdates
+        self.show_rrule_start = show_rrule_start
+        self.show_rrule_end = show_rrule_end
+
         if frequencies is not None:
             self.frequencies = frequencies
         else:
@@ -197,3 +206,12 @@ class RecurrenceField(forms.CharField):
                 raise forms.ValidationError(self.error_messages["recurrence_required"])
 
         return recurrence_obj
+
+    def widget_attrs(self, widget):
+        attrs = super().widget_attrs(widget)
+        recurrence_options = {
+            "showRRuleStart": self.show_rrule_start,
+            "showRRuleEnd": self.show_rrule_end,
+        }
+        attrs["data-recurrence-options"] = json.dumps(recurrence_options)
+        return attrs

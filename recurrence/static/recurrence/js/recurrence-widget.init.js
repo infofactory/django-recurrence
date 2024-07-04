@@ -1,4 +1,4 @@
-function initRecurrenceWidget(name) {
+function initRecurrenceWidget(name, options = {}) {
   const input = document.getElementById(name);
   if (!input) return;
 
@@ -14,5 +14,5 @@ function initRecurrenceWidget(name) {
     };
   }
 
-  new recurrence.widget.Widget(input, {});
+  new recurrence.widget.Widget(input, options);
 }
