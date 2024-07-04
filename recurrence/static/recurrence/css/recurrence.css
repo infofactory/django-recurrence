@@ -68,15 +68,16 @@ div.recurrence-widget input {
 }
 
 div.recurrence-widget .mode {
-  padding: .25em 0 1em 0;
+  padding: 1em 0 0 0;
 }
 
 div.recurrence-widget .interval {
-  padding: .25em 0 1em 0;
+  padding: 1em 0;
 }
 
 div.recurrence-widget .limit {
   padding: 1em 0 0 0;
+  border-top: 1px solid var(--border-color);
 }
 
 div.recurrence-widget .limit ul {
@@ -100,9 +101,18 @@ div.recurrence-widget .until-count .count {
   padding-left: 1em;
 }
 
-div.recurrence-widget .form {
+div.recurrence-widget .form > :not(:empty) {
   padding: .25em 0 1em 0;
-  border-bottom: 1px solid var(--border-color);
+}
+
+div.recurrence-widget .body .recurrence > :first-child,
+div.recurrence-widget .body .date > :first-child {
+  padding-top: .25em;
+}
+
+div.recurrence-widget .body .recurrence > :last-child,
+div.recurrence-widget .body .date > :last-child {
+  padding-bottom: .25em;
 }
 
 div.recurrence-widget .weekday-grid {
