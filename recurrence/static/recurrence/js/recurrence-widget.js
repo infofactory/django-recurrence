@@ -465,7 +465,6 @@ recurrence.widget.RuleForm.prototype = {
       this.update();
       return;
     }
-    console.log("MODE CHANGED", mode);
     if (this.mode == recurrence.widget.INCLUSION) {
       recurrence.array.remove(
         this.panel.widget.data.rrules, this.rule);
