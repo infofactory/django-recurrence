@@ -506,7 +506,6 @@ recurrence.to_weekday = function (token) {
   } else {
     return new recurrence.Weekday(parseInt(token, 10));
   }
-  throw Error('Invalid weekday token.');
 };
 
 recurrence.serialize = function (rule_or_recurrence) {
