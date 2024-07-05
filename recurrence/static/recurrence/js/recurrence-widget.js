@@ -318,19 +318,6 @@ recurrence.widget.RuleForm.prototype = {
         } else {
           never_radio.checked = true;
         }
-      } else {
-        const defaultEnd = form.panel.widget.options.defaultEnd;
-        if (defaultEnd) {
-          if (defaultEnd == 'COUNT') {
-            count_radio.checked = true;
-          } else if (defaultEnd == 'UNTIL') {
-            until_radio.checked = true;
-            form.set_until(until_date_selector.value);
-          } else if (defaultEnd == 'NEVER') {
-            never_radio.checked = true;
-            form.set_count(parseInt(count_field.value), 10);
-          }
-        }
       }
 
       until_radio.onclick = function () {
@@ -386,6 +373,21 @@ recurrence.widget.RuleForm.prototype = {
     if (showRRuleEnd) {
       const count_value = this.rule.count ? this.rule.count : 1;
       this.update_count_text(count_value);
+
+      if (this.options.isNew) {
+        const defaultEnd = form.panel.widget.options.defaultEnd;
+        if (defaultEnd) {
+          if (defaultEnd == 'COUNT') {
+            count_radio.checked = true;
+          } else if (defaultEnd == 'UNTIL') {
+            until_radio.checked = true;
+            form.set_until(until_date_selector.value);
+          } else if (defaultEnd == 'NEVER') {
+            never_radio.checked = true;
+            form.set_count(parseInt(count_field.value), 10);
+          }
+        }
+      }
     }
 
     // freq forms
