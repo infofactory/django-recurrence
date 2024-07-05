@@ -87,6 +87,7 @@ class RecurrenceField(forms.CharField):
         max_exdates=None,
         show_rrule_start=False,
         show_rrule_end=True,
+        default_end="NEVER",
         *args,
         **kwargs
     ):
@@ -132,6 +133,7 @@ class RecurrenceField(forms.CharField):
         self.max_exdates = max_exdates
         self.show_rrule_start = show_rrule_start
         self.show_rrule_end = show_rrule_end
+        self.default_end = default_end
 
         if frequencies is not None:
             self.frequencies = frequencies
@@ -212,6 +214,7 @@ class RecurrenceField(forms.CharField):
         recurrence_options = {
             "showRRuleStart": self.show_rrule_start,
             "showRRuleEnd": self.show_rrule_end,
+            "defaultEnd": self.default_end,
         }
         attrs["data-recurrence-options"] = json.dumps(recurrence_options)
         return attrs

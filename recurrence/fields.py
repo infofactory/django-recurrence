@@ -8,11 +8,15 @@ from recurrence.compat import Creator
 
 class RecurrenceField(fields.Field):
     """Field that stores a `recurrence.base.Recurrence` to the database."""
+    REPEAT_UNTIL = "UNTIL"
+    REPEAT_COUNT = "COUNT"
+    REPEAT_FOREVER = "NEVER"
 
-    def __init__(self, include_dtstart=True, show_rrule_start=False, show_rrule_end=True, **kwargs):
+    def __init__(self, include_dtstart=True, show_rrule_start=False, show_rrule_end=True, default_end=REPEAT_FOREVER, **kwargs):
         self.include_dtstart = include_dtstart
         self.show_rrule_start = show_rrule_start
         self.show_rrule_end = show_rrule_end
+        self.default_end = default_end
         super(RecurrenceField, self).__init__(**kwargs)
 
     def get_internal_type(self):
@@ -45,6 +49,7 @@ class RecurrenceField(fields.Field):
             'widget': forms.RecurrenceWidget,
             'show_rrule_start': self.show_rrule_start,
             'show_rrule_end': self.show_rrule_end,
+            'default_end': self.default_end,
         }
         defaults.update(kwargs)
         return super().formfield(**defaults)

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Django Recurrence 1.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-04 12:14+0200\n"
+"POT-Creation-Date: 2024-07-05 10:44+0200\n"
 "PO-Revision-Date: 2017-02-24 23:28+0100\n"
 "Last-Translator: Bart Heesink <bheesink@jouwomgeving.nl>\n"
 "Language-Team:  <bheesink@jouwomgeving.nl>\n"
@@ -47,22 +47,22 @@ msgid "secondly"
 msgstr "elke seconde"
 
 #: base.py:1128 templates/recurrence/recurrence_widget.html:31
-#: templates/recurrence/recurrence_widget.html:148
+#: templates/recurrence/recurrence_widget.html:149
 msgid "years"
 msgstr "jaren"
 
 #: base.py:1128 templates/recurrence/recurrence_widget.html:32
-#: templates/recurrence/recurrence_widget.html:149
+#: templates/recurrence/recurrence_widget.html:150
 msgid "months"
 msgstr "maanden"
 
 #: base.py:1128 templates/recurrence/recurrence_widget.html:33
-#: templates/recurrence/recurrence_widget.html:150
+#: templates/recurrence/recurrence_widget.html:151
 msgid "weeks"
 msgstr "weken"
 
 #: base.py:1128 templates/recurrence/recurrence_widget.html:34
-#: templates/recurrence/recurrence_widget.html:151
+#: templates/recurrence/recurrence_widget.html:152
 msgid "days"
 msgstr "dagen"
 
@@ -100,8 +100,8 @@ msgstr "4e %(weekday)s"
 
 #: base.py:1138 base.py:1158 templates/recurrence/recurrence_widget.html:65
 #: templates/recurrence/recurrence_widget.html:74
-#: templates/recurrence/recurrence_widget.html:196
-#: templates/recurrence/recurrence_widget.html:264
+#: templates/recurrence/recurrence_widget.html:197
+#: templates/recurrence/recurrence_widget.html:265
 #, python-format
 msgid "last %(weekday)s"
 msgstr "laatste %(weekday)s"
@@ -139,43 +139,43 @@ msgid "4th last"
 msgstr "4 na laatste"
 
 #: base.py:1154 templates/recurrence/recurrence_widget.html:61
-#: templates/recurrence/recurrence_widget.html:180
-#: templates/recurrence/recurrence_widget.html:248
+#: templates/recurrence/recurrence_widget.html:181
+#: templates/recurrence/recurrence_widget.html:249
 #, python-format
 msgid "first %(weekday)s"
 msgstr "eerste %(weekday)s"
 
 #: base.py:1155 templates/recurrence/recurrence_widget.html:62
-#: templates/recurrence/recurrence_widget.html:184
-#: templates/recurrence/recurrence_widget.html:252
+#: templates/recurrence/recurrence_widget.html:185
+#: templates/recurrence/recurrence_widget.html:253
 #, python-format
 msgid "second %(weekday)s"
 msgstr "tweede %(weekday)s"
 
 #: base.py:1156 templates/recurrence/recurrence_widget.html:63
-#: templates/recurrence/recurrence_widget.html:188
-#: templates/recurrence/recurrence_widget.html:256
+#: templates/recurrence/recurrence_widget.html:189
+#: templates/recurrence/recurrence_widget.html:257
 #, python-format
 msgid "third %(weekday)s"
 msgstr "derde %(weekday)s"
 
 #: base.py:1157 templates/recurrence/recurrence_widget.html:64
-#: templates/recurrence/recurrence_widget.html:192
-#: templates/recurrence/recurrence_widget.html:260
+#: templates/recurrence/recurrence_widget.html:193
+#: templates/recurrence/recurrence_widget.html:261
 #, python-format
 msgid "fourth %(weekday)s"
 msgstr "vierde %(weekday)s"
 
 #: base.py:1159 templates/recurrence/recurrence_widget.html:66
-#: templates/recurrence/recurrence_widget.html:200
-#: templates/recurrence/recurrence_widget.html:268
+#: templates/recurrence/recurrence_widget.html:201
+#: templates/recurrence/recurrence_widget.html:269
 #, python-format
 msgid "second last %(weekday)s"
 msgstr "twee na laatste %(weekday)s"
 
 #: base.py:1160 templates/recurrence/recurrence_widget.html:67
-#: templates/recurrence/recurrence_widget.html:204
-#: templates/recurrence/recurrence_widget.html:272
+#: templates/recurrence/recurrence_widget.html:205
+#: templates/recurrence/recurrence_widget.html:273
 #, python-format
 msgid "third last %(weekday)s"
 msgstr "drie na laatste %(weekday)s"
@@ -197,13 +197,13 @@ msgstr "derde laatste"
 msgid "fourth last"
 msgstr "vierde laatste"
 
-#: base.py:1187 base.py:1204 base.py:1215 base.py:1228 base.py:1246
+#: base.py:1187 base.py:1204 base.py:1215 base.py:1228 base.py:1250
 msgid ", "
 msgstr ""
 
 #: base.py:1193 templates/recurrence/recurrence_widget.html:14
-#: templates/recurrence/recurrence_widget.html:143
-#: templates/recurrence/recurrence_widget.html:220
+#: templates/recurrence/recurrence_widget.html:144
+#: templates/recurrence/recurrence_widget.html:221
 #, python-format
 msgid "every %(number)s %(freq)s"
 msgstr "elke %(number)s %(freq)s"
@@ -215,22 +215,28 @@ msgstr "iedere %(items)s"
 
 #: base.py:1210 base.py:1219 base.py:1223
 #: templates/recurrence/recurrence_widget.html:13
-#: templates/recurrence/recurrence_widget.html:174
-#: templates/recurrence/recurrence_widget.html:242
+#: templates/recurrence/recurrence_widget.html:175
+#: templates/recurrence/recurrence_widget.html:243
 #, python-format
 msgid "on the %(items)s"
 msgstr "op de %(items)s"
 
-#: base.py:1238
+#: base.py:1237 templates/recurrence/recurrence_widget.html:18
+#, fuzzy, python-format
+#| msgid "until %(date)s"
+msgid "from %(date)s"
+msgstr "tot %(date)s"
+
+#: base.py:1242
 msgid "occuring once"
 msgstr "éénmalig"
 
-#: base.py:1240 templates/recurrence/recurrence_widget.html:17
+#: base.py:1244 templates/recurrence/recurrence_widget.html:17
 #, python-format
 msgid "occuring %(number)s times"
 msgstr "%(number)s keer herhalen"
 
-#: base.py:1243 templates/recurrence/recurrence_widget.html:19
+#: base.py:1247 templates/recurrence/recurrence_widget.html:19
 #, python-format
 msgid "until %(date)s"
 msgstr "tot %(date)s"
@@ -243,31 +249,31 @@ msgstr "inclusief"
 msgid "excluding"
 msgstr "uitgezonderd"
 
-#: forms.py:61
+#: forms.py:65
 msgid "Invalid frequency."
 msgstr "Ongeldige herhaling."
 
-#: forms.py:62
+#: forms.py:66
 #, python-format
 msgid "Max rules exceeded. The limit is %(limit)s"
 msgstr "Maximaal aantal van %(limit)s regels is overschreden."
 
-#: forms.py:64
+#: forms.py:68
 #, python-format
 msgid "Max exclusion rules exceeded. The limit is %(limit)s"
 msgstr "Maximaal aantal van %(limit)s uitgezonderde regels is overschreden."
 
-#: forms.py:66
+#: forms.py:70
 #, python-format
 msgid "Max dates exceeded. The limit is %(limit)s"
 msgstr "Maximaal aantal van %(limit)s data overschreden."
 
-#: forms.py:68
+#: forms.py:72
 #, python-format
 msgid "Max exclusion dates exceeded. The limit is %(limit)s"
 msgstr "Maximaal aantal van %(limit)s uitgezonderde data is overschreden."
 
-#: forms.py:71
+#: forms.py:75
 msgid "This field is required. Set either a recurrence rule or date."
 msgstr ""
 
@@ -284,29 +290,23 @@ msgstr "'s middags"
 msgid "occuring %(number)s time"
 msgstr "herhaalt %(number)s keer"
 
-#: templates/recurrence/recurrence_widget.html:18
-#, fuzzy, python-format
-#| msgid "until %(date)s"
-msgid "from %(date)s"
-msgstr "tot %(date)s"
-
 #: templates/recurrence/recurrence_widget.html:22
-#: templates/recurrence/recurrence_widget.html:148
+#: templates/recurrence/recurrence_widget.html:149
 msgid "year"
 msgstr "jaar"
 
 #: templates/recurrence/recurrence_widget.html:23
-#: templates/recurrence/recurrence_widget.html:149
+#: templates/recurrence/recurrence_widget.html:150
 msgid "month"
 msgstr "maand"
 
 #: templates/recurrence/recurrence_widget.html:24
-#: templates/recurrence/recurrence_widget.html:150
+#: templates/recurrence/recurrence_widget.html:151
 msgid "week"
 msgstr "week"
 
 #: templates/recurrence/recurrence_widget.html:25
-#: templates/recurrence/recurrence_widget.html:151
+#: templates/recurrence/recurrence_widget.html:152
 msgid "day"
 msgstr "dag"
 
@@ -360,17 +360,17 @@ msgstr "Herhaal %(number)s keer"
 msgid "Occurs %(number)s times"
 msgstr "Herhaal %(number)s keer"
 
-#: templates/recurrence/recurrence_widget.html:125
+#: templates/recurrence/recurrence_widget.html:126
 msgid "Delete"
 msgstr ""
 
-#: templates/recurrence/recurrence_widget.html:134
+#: templates/recurrence/recurrence_widget.html:135
 #, fuzzy
 #| msgid "Repeat until"
 msgid "Repeat from"
 msgstr "Herhaal tot"
 
-#: templates/recurrence/recurrence_widget.html:139
+#: templates/recurrence/recurrence_widget.html:140
 msgid "Exclude these occurences"
 msgstr "Sluit deze uit"
 
@@ -379,18 +379,22 @@ msgid "Repeat until"
 msgstr "Herhaal tot"
 
 #: templates/recurrence/recurrence_widget.html:299
-#: templates/recurrence/recurrence_widget.html:318
+#: templates/recurrence/recurrence_widget.html:322
 msgid "Date"
 msgstr "Datum"
 
-#: templates/recurrence/recurrence_widget.html:315
+#: templates/recurrence/recurrence_widget.html:310
+msgid "Never"
+msgstr ""
+
+#: templates/recurrence/recurrence_widget.html:319
 msgid "Exclude this date"
 msgstr "Deze datum uitsluiten"
 
-#: templates/recurrence/recurrence_widget.html:326
+#: templates/recurrence/recurrence_widget.html:330
 msgid "Add rule"
 msgstr "Herhaling toevoegen"
 
-#: templates/recurrence/recurrence_widget.html:327
+#: templates/recurrence/recurrence_widget.html:331
 msgid "Add date"
 msgstr "Datum toevoegen"

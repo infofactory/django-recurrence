@@ -292,7 +292,6 @@
       <div class="daily-form hidden"></div>
     </div>
     <div class="limit">
-      <input class="checkbox" type="checkbox" name="limit">
       <span class="recurrence-label">{% trans "Repeat until" %}:</span>
       <ul class="until-count">
         <li class="until">
@@ -305,6 +304,10 @@
           <span class="recurrence-label"></span>
           <input name="count" type="number" size="4" value="1" min="1">
           <span class="recurrence-label"></span>
+        </li>
+        <li class="never">
+          <input class="radio" type="radio" data-name="until_count" value="never">
+          <span class="recurrence-label">{% trans "Never" %}</span>
         </li>
       </ul>
     </div>

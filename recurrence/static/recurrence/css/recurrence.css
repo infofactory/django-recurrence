@@ -100,14 +100,11 @@ div.recurrence-widget .until-count {
 }
 
 div.recurrence-widget .until-count li {
-  margin: 0;
-  padding: 0;
-  display: inline;
-  list-style-type: none;
-}
-
-div.recurrence-widget .until-count .count {
-  padding-left: 1em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  align-items: center;
+  min-height: 3em;
 }
 
 div.recurrence-widget .form > :not(:empty) {

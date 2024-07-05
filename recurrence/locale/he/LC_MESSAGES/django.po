@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-04 12:14+0200\n"
+"POT-Creation-Date: 2024-07-05 10:44+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -40,22 +40,22 @@ msgid "secondly"
 msgstr "שנייתי"
 
 #: base.py:1128 templates/recurrence/recurrence_widget.html:31
-#: templates/recurrence/recurrence_widget.html:148
+#: templates/recurrence/recurrence_widget.html:149
 msgid "years"
 msgstr "שנים"
 
 #: base.py:1128 templates/recurrence/recurrence_widget.html:32
-#: templates/recurrence/recurrence_widget.html:149
+#: templates/recurrence/recurrence_widget.html:150
 msgid "months"
 msgstr "חודשים"
 
 #: base.py:1128 templates/recurrence/recurrence_widget.html:33
-#: templates/recurrence/recurrence_widget.html:150
+#: templates/recurrence/recurrence_widget.html:151
 msgid "weeks"
 msgstr "שבועות"
 
 #: base.py:1128 templates/recurrence/recurrence_widget.html:34
-#: templates/recurrence/recurrence_widget.html:151
+#: templates/recurrence/recurrence_widget.html:152
 msgid "days"
 msgstr "ימים"
 
@@ -94,8 +94,8 @@ msgstr "%(weekday)s שלישי"
 
 #: base.py:1138 base.py:1158 templates/recurrence/recurrence_widget.html:65
 #: templates/recurrence/recurrence_widget.html:74
-#: templates/recurrence/recurrence_widget.html:196
-#: templates/recurrence/recurrence_widget.html:264
+#: templates/recurrence/recurrence_widget.html:197
+#: templates/recurrence/recurrence_widget.html:265
 #, python-format
 msgid "last %(weekday)s"
 msgstr "%(weekday)s האחרון"
@@ -134,43 +134,43 @@ msgid "4th last"
 msgstr "רביעי לפני אחרון"
 
 #: base.py:1154 templates/recurrence/recurrence_widget.html:61
-#: templates/recurrence/recurrence_widget.html:180
-#: templates/recurrence/recurrence_widget.html:248
+#: templates/recurrence/recurrence_widget.html:181
+#: templates/recurrence/recurrence_widget.html:249
 #, python-format
 msgid "first %(weekday)s"
 msgstr "%(weekday)s ראשון"
 
 #: base.py:1155 templates/recurrence/recurrence_widget.html:62
-#: templates/recurrence/recurrence_widget.html:184
-#: templates/recurrence/recurrence_widget.html:252
+#: templates/recurrence/recurrence_widget.html:185
+#: templates/recurrence/recurrence_widget.html:253
 #, python-format
 msgid "second %(weekday)s"
 msgstr "%(weekday)s שני"
 
 #: base.py:1156 templates/recurrence/recurrence_widget.html:63
-#: templates/recurrence/recurrence_widget.html:188
-#: templates/recurrence/recurrence_widget.html:256
+#: templates/recurrence/recurrence_widget.html:189
+#: templates/recurrence/recurrence_widget.html:257
 #, python-format
 msgid "third %(weekday)s"
 msgstr "%(weekday)s שלישי"
 
 #: base.py:1157 templates/recurrence/recurrence_widget.html:64
-#: templates/recurrence/recurrence_widget.html:192
-#: templates/recurrence/recurrence_widget.html:260
+#: templates/recurrence/recurrence_widget.html:193
+#: templates/recurrence/recurrence_widget.html:261
 #, python-format
 msgid "fourth %(weekday)s"
 msgstr "%(weekday)s רביעי"
 
 #: base.py:1159 templates/recurrence/recurrence_widget.html:66
-#: templates/recurrence/recurrence_widget.html:200
-#: templates/recurrence/recurrence_widget.html:268
+#: templates/recurrence/recurrence_widget.html:201
+#: templates/recurrence/recurrence_widget.html:269
 #, python-format
 msgid "second last %(weekday)s"
 msgstr "%(weekday)s שני לפני אחרון"
 
 #: base.py:1160 templates/recurrence/recurrence_widget.html:67
-#: templates/recurrence/recurrence_widget.html:204
-#: templates/recurrence/recurrence_widget.html:272
+#: templates/recurrence/recurrence_widget.html:205
+#: templates/recurrence/recurrence_widget.html:273
 #, python-format
 msgid "third last %(weekday)s"
 msgstr "%(weekday)s שלישי לפני אחרון"
@@ -193,13 +193,13 @@ msgstr "שלישי לפני אחרון"
 msgid "fourth last"
 msgstr "רביעי לפני אחרון"
 
-#: base.py:1187 base.py:1204 base.py:1215 base.py:1228 base.py:1246
+#: base.py:1187 base.py:1204 base.py:1215 base.py:1228 base.py:1250
 msgid ", "
 msgstr ", "
 
 #: base.py:1193 templates/recurrence/recurrence_widget.html:14
-#: templates/recurrence/recurrence_widget.html:143
-#: templates/recurrence/recurrence_widget.html:220
+#: templates/recurrence/recurrence_widget.html:144
+#: templates/recurrence/recurrence_widget.html:221
 #, python-format
 msgid "every %(number)s %(freq)s"
 msgstr "כל %(number)s %(freq)s"
@@ -211,22 +211,28 @@ msgstr "כל %(items)s"
 
 #: base.py:1210 base.py:1219 base.py:1223
 #: templates/recurrence/recurrence_widget.html:13
-#: templates/recurrence/recurrence_widget.html:174
-#: templates/recurrence/recurrence_widget.html:242
+#: templates/recurrence/recurrence_widget.html:175
+#: templates/recurrence/recurrence_widget.html:243
 #, python-format
 msgid "on the %(items)s"
 msgstr "בה%(items)s"
 
-#: base.py:1238
+#: base.py:1237 templates/recurrence/recurrence_widget.html:18
+#, fuzzy, python-format
+#| msgid "until %(date)s"
+msgid "from %(date)s"
+msgstr "עד %(date)s"
+
+#: base.py:1242
 msgid "occuring once"
 msgstr "מקרה חד פעמי"
 
-#: base.py:1240 templates/recurrence/recurrence_widget.html:17
+#: base.py:1244 templates/recurrence/recurrence_widget.html:17
 #, python-format
 msgid "occuring %(number)s times"
 msgstr "מקרה %(number)s פעמים"
 
-#: base.py:1243 templates/recurrence/recurrence_widget.html:19
+#: base.py:1247 templates/recurrence/recurrence_widget.html:19
 #, python-format
 msgid "until %(date)s"
 msgstr "עד %(date)s"
@@ -239,31 +245,31 @@ msgstr "כולל"
 msgid "excluding"
 msgstr "לא כולל"
 
-#: forms.py:61
+#: forms.py:65
 msgid "Invalid frequency."
 msgstr "תדירות לא ולידי."
 
-#: forms.py:62
+#: forms.py:66
 #, python-format
 msgid "Max rules exceeded. The limit is %(limit)s"
 msgstr "כמות מקסימלית של חוקים עברה. המגבלה היא %(limit)s"
 
-#: forms.py:64
+#: forms.py:68
 #, python-format
 msgid "Max exclusion rules exceeded. The limit is %(limit)s"
 msgstr "כמות מקסימלי של חוקים החרגים עברה. המגבלה היא %(limit)s"
 
-#: forms.py:66
+#: forms.py:70
 #, python-format
 msgid "Max dates exceeded. The limit is %(limit)s"
 msgstr "כמות התאריכים עברה. המגבלה היא %(limit)s"
 
-#: forms.py:68
+#: forms.py:72
 #, python-format
 msgid "Max exclusion dates exceeded. The limit is %(limit)s"
 msgstr "כמות התאריכים החרגים עברה. המגבלה היא %(limit)s"
 
-#: forms.py:71
+#: forms.py:75
 msgid "This field is required. Set either a recurrence rule or date."
 msgstr "השדה הזאת נדרש. קבע או חוק חזרות או תאריך חזרות."
 
@@ -280,35 +286,29 @@ msgstr "צהריים"
 msgid "occuring %(number)s time"
 msgstr "קורה %(number)s פעם"
 
-#: templates/recurrence/recurrence_widget.html:18
-#, fuzzy, python-format
-#| msgid "until %(date)s"
-msgid "from %(date)s"
-msgstr "עד %(date)s"
-
 #: templates/recurrence/recurrence_widget.html:22
-#: templates/recurrence/recurrence_widget.html:148
+#: templates/recurrence/recurrence_widget.html:149
 #, fuzzy
 #| msgid "years"
 msgid "year"
 msgstr "שנים"
 
 #: templates/recurrence/recurrence_widget.html:23
-#: templates/recurrence/recurrence_widget.html:149
+#: templates/recurrence/recurrence_widget.html:150
 #, fuzzy
 #| msgid "months"
 msgid "month"
 msgstr "חודשים"
 
 #: templates/recurrence/recurrence_widget.html:24
-#: templates/recurrence/recurrence_widget.html:150
+#: templates/recurrence/recurrence_widget.html:151
 #, fuzzy
 #| msgid "weeks"
 msgid "week"
 msgstr "שבועות"
 
 #: templates/recurrence/recurrence_widget.html:25
-#: templates/recurrence/recurrence_widget.html:151
+#: templates/recurrence/recurrence_widget.html:152
 #, fuzzy
 #| msgid "days"
 msgid "day"
@@ -370,17 +370,17 @@ msgstr "קורא %(number)s פעם"
 msgid "Occurs %(number)s times"
 msgstr "קורא %(number)s פעמים"
 
-#: templates/recurrence/recurrence_widget.html:125
+#: templates/recurrence/recurrence_widget.html:126
 msgid "Delete"
 msgstr ""
 
-#: templates/recurrence/recurrence_widget.html:134
+#: templates/recurrence/recurrence_widget.html:135
 #, fuzzy
 #| msgid "Repeat until"
 msgid "Repeat from"
 msgstr "חוזר עד"
 
-#: templates/recurrence/recurrence_widget.html:139
+#: templates/recurrence/recurrence_widget.html:140
 msgid "Exclude these occurences"
 msgstr "מחריג את הפעמים האלה"
 
@@ -389,18 +389,22 @@ msgid "Repeat until"
 msgstr "חוזר עד"
 
 #: templates/recurrence/recurrence_widget.html:299
-#: templates/recurrence/recurrence_widget.html:318
+#: templates/recurrence/recurrence_widget.html:322
 msgid "Date"
 msgstr "תאריך"
 
-#: templates/recurrence/recurrence_widget.html:315
+#: templates/recurrence/recurrence_widget.html:310
+msgid "Never"
+msgstr ""
+
+#: templates/recurrence/recurrence_widget.html:319
 msgid "Exclude this date"
 msgstr "מרחיג את התאריך הזה"
 
-#: templates/recurrence/recurrence_widget.html:326
+#: templates/recurrence/recurrence_widget.html:330
 msgid "Add rule"
 msgstr "הוסיף חוק"
 
-#: templates/recurrence/recurrence_widget.html:327
+#: templates/recurrence/recurrence_widget.html:331
 msgid "Add date"
 msgstr "הוסיף תאריך"
