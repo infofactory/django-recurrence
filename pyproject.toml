@@ -3,6 +3,7 @@ name = "django-recurrence"
 version = "1.13"
 description = "Django utility wrapping dateutil.rrule"
 authors = [
+    {name = "Alessio Tognan", email = "tognan@infofactory.it"},
     {name = "Tamas Kemenczy", email = "tamas.kemenczy@gmail.com"},
     {name = "Lino Helms", email = "lino@lino.io"}
 ]
@@ -47,6 +48,9 @@ test = [
 ]
 dev = [
     "flake8==4.0.1",
+    "setuptools>=69.0.3",
+    "tox-pdm>=0.6.1",
+    "tox>=3.25.1",
 ]
 docs = [
     "sphinx==4.3.2",
@@ -54,20 +58,14 @@ docs = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/jazzband/django-recurrence"
+Homepage = "https://github.com/infofactory/django-recurrence"
+
 [build-system]
-requires = ["pdm-backend"]
-build-backend = "pdm.backend"
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
 
-[tool.pdm]
-distribution = true
+[tool.setuptools.package-data]
+"*" = ["*.py", "*.html", "*.css", "*.js", "*.po", "*.mo"]
 
-[tool.pdm.dev-dependencies]
-dev = [
-    "setuptools>=69.0.3",
-    "tox-pdm>=0.6.1",
-    "tox>=3.25.1",
-]
-
-[tool.pdm.package-dir]
+[tool.setuptools.package-dir]
 recurrence = "recurrence"
