@@ -269,12 +269,12 @@ recurrence.widget.RuleForm.prototype = {
       const until_value = this.rule.until ? recurrence.date.format(this.rule.until, '%Y-%m-%d') : new Date().toISOString().slice(0, 10);
       const until_container = until_count_container.querySelector('.until');
       until_date_selector = until_count_container.querySelector('input[type="date"]');
-      until_radio = until_container.querySelector('input[value="until"]');
+      until_radio = until_container.querySelector('input[data-name="until_count"][value="until"]');
       until_date_selector.value = until_value;
 
       // count
       const count_container = until_count_container.querySelector('.count');
-      count_radio = count_container.querySelector('input[value="count"]');
+      count_radio = count_container.querySelector('input[data-name="until_count"][value="count"]');
       count_field = count_container.querySelector('input[name="count"]');
 
       if (this.rule.until || this.rule.count) {
@@ -684,13 +684,13 @@ recurrence.widget.RuleMonthlyForm.prototype = {
       }
     })
 
-    const monthday_radio = root.querySelector('input[name="monthly"][value="monthday"]');
+    const monthday_radio = root.querySelector('input[data-name="monthly"][value="monthday"]');
 
     // weekday
     const weekday_container = root.querySelector('.weekday');
     const position_select = weekday_container.querySelector('select[name="position"]');
     const weekday_select = weekday_container.querySelector('select[name="weekday"]');
-    const weekday_radio = weekday_container.querySelector('input[name="monthly"][value="weekday"]');
+    const weekday_radio = weekday_container.querySelector('input[data-name="monthly"][value="weekday"]');
 
     // events
     if (form.rule.byday.length) {

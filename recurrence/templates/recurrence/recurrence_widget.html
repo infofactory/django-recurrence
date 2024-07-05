@@ -216,7 +216,7 @@
       </div>
       <div class="monthly-form hidden">
         <div class="monthday">
-          <input class="radio" type="radio" name="monthly" value="monthday">
+          <input class="radio" type="radio" data-name="monthly" value="monthday">
           <span class="recurrence-label">
             {% blocktrans trimmed asvar every_label with number='' freq='' %}every {{ number }} {{ freq }}{% endblocktrans %}
             {{ every_label.strip.capitalize }}:
@@ -238,7 +238,7 @@
           </div>
         </div>
         <div class="weekday">
-          <input class="radio" type="radio" name="monthly" value="weekday">
+          <input class="radio" type="radio" data-name="monthly" value="weekday">
           <span class="recurrence-label">
             {% blocktrans trimmed asvar on_the_label with items='' %}on the {{ items }}{% endblocktrans %}
             {{ on_the_label.strip.capitalize }}:
@@ -296,12 +296,12 @@
       <span class="recurrence-label">{% trans "Repeat until" %}:</span>
       <ul class="until-count">
         <li class="until">
-          <input class="radio" type="radio" name="until_count" value="until">
+          <input class="radio" type="radio" data-name="until_count" value="until">
           <span class="recurrence-label">{% trans "Date" %}:</span>
           <input class="vTextField" size="10" type="date">
         </li>
         <li class="count">
-          <input class="radio" type="radio" name="until_count" value="count">
+          <input class="radio" type="radio" data-name="until_count" value="count">
           <span class="recurrence-label"></span>
           <input name="count" type="number" size="4" value="1" min="1">
           <span class="recurrence-label"></span>
