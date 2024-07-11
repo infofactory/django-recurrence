@@ -5,11 +5,7 @@ recurrence.widget.INCLUSION = true;
 recurrence.widget.EXCLUSION = false;
 
 recurrence.widget.date_today = function() {
-  var date = new Date();
-  date.setHours(0);
-  date.setMinutes(0);
-  date.setSeconds(0);
-  return date;
+  return new Date(new Date().toISOString().slice(0, 10));
 };
 
 recurrence.widget.Widget = function(textarea, options){
@@ -909,7 +905,15 @@ recurrence.widget.DateForm.prototype = {
     const date_selector = date_container.querySelector('input[type="date"]');
     date_selector.value = recurrence.date.format(this.date, '%Y-%m-%d');
     date_selector.onchange = function() {
-      form.date = new Date(this.value);
+      const thisDate = new Date(this.value);
+      if (form.mode == recurrence.widget.INCLUSION){
+        recurrence.array.remove(form.panel.widget.data.rdates, form.date);
+        form.panel.widget.data.rdates.push(thisDate);
+      } else {
+        recurrence.array.remove(form.panel.widget.data.exdates, form.date);
+        form.panel.widget.data.exdates.push(thisDate);
+      }
+      form.date = thisDate;
       form.update();
     }
     // init dom
@@ -926,29 +930,23 @@ recurrence.widget.DateForm.prototype = {
   },
 
   set_mode: function(mode) {
-      if (this.mode != mode) {
-          if (this.mode == recurrence.widget.INCLUSION) {
-              recurrence.array.remove(
-                  this.panel.widget.data.rdates, this.date);
-              this.panel.widget.data.exdates.push(this.date);
-              recurrence.widget.remove_class(
-                  this.elements.root, 'inclusion');
-              recurrence.widget.add_class(
-                  this.elements.root, 'exclusion');
-              this.update();
-          } else {
-              recurrence.array.remove(
-                  this.panel.widget.data.exdates, this.date);
-              this.panel.widget.data.rdates.push(this.date);
-              recurrence.widget.remove_class(
-                  this.elements.root, 'exclusion');
-              recurrence.widget.add_class(
-                  this.elements.root, 'inclusion');
-              this.update();
-          }
-          this.mode = mode;
+    if (this.mode != mode) {
+      if (this.mode == recurrence.widget.INCLUSION) {
+        recurrence.array.remove(this.panel.widget.data.rdates, this.date);
+        this.panel.widget.data.exdates.push(this.date);
+        this.elements.root.classList.remove('inclusion');
+        this.elements.root.classList.add('exclusion');
+        this.update();
+      } else {
+        recurrence.array.remove(this.panel.widget.data.exdates, this.date);
+        this.panel.widget.data.rdates.push(this.date);
+        this.elements.root.classList.remove('exclusion');
+        this.elements.root.classList.add('inclusion');
+        this.update();
       }
-      this.update();
+      this.mode = mode;
+    }
+    this.update();
   },
 
   update: function() {
