@@ -5,7 +5,7 @@ recurrence.widget.INCLUSION = true;
 recurrence.widget.EXCLUSION = false;
 
 recurrence.widget.date_today = function() {
-  return new Date(new Date().toISOString().slice(0, 10));
+  return new Date(new Date().toISOString().slice(0, 10)+"T00:00:00Z");
 };
 
 recurrence.widget.Widget = function(textarea, options){
@@ -261,7 +261,7 @@ recurrence.widget.RuleForm.prototype = {
       const until_count_container = limit_container.querySelector('.until-count');
 
       // until
-      const until_value = this.rule.until ? recurrence.date.format(this.rule.until, '%Y-%m-%d') : new Date().toISOString().slice(0, 10);
+      const until_value = this.rule.until ? recurrence.date.format(this.rule.until, '%Y-%m-%d') : new Date().toISOString().slice(0, 10)+"T00:00:00Z";
       const until_container = until_count_container.querySelector('.until');
       until_date_selector = until_count_container.querySelector('input[type="date"]');
       until_radio = until_container.querySelector('input[data-name="until_count"][value="until"]');
@@ -414,7 +414,7 @@ recurrence.widget.RuleForm.prototype = {
   },
 
   set_dtstart: function(dtstart) {
-    if (dtstart) dtstart = new Date(dtstart);
+    if (dtstart) dtstart = new Date(dtstart+"T00:00:00Z");
     else dtstart = null;
     this.freq_rules.forEach(function(rule) {
       rule.dtstart = dtstart;
@@ -424,7 +424,7 @@ recurrence.widget.RuleForm.prototype = {
 
   set_until: function(until) {
     if (until) {
-      until = new Date(until);
+      until = new Date(until+"T00:00:00Z");
     } else {
       until = recurrence.widget.date_today();
       this.elements.until_date_selector.value = until.toISOString().split('T')[0];
@@ -905,7 +905,7 @@ recurrence.widget.DateForm.prototype = {
     const date_selector = date_container.querySelector('input[type="date"]');
     date_selector.value = recurrence.date.format(this.date, '%Y-%m-%d');
     date_selector.onchange = function() {
-      const thisDate = new Date(this.value);
+      const thisDate = new Date(this.value+"T00:00:00Z");
       if (form.mode == recurrence.widget.INCLUSION){
         recurrence.array.remove(form.panel.widget.data.rdates, form.date);
         form.panel.widget.data.rdates.push(thisDate);

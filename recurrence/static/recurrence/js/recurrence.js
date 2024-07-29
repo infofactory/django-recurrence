@@ -135,8 +135,8 @@ recurrence.Rule.prototype = {
             }
           } else {
             var dt = new Date();
-            dt.setMonth(0);
-            dt.setDate(day);
+            dt.setUTCMonth(0);
+            dt.setUTCDate(day);
             return recurrence.date.format(dt, recurrence.display.month_day);
           }
         });
@@ -789,20 +789,20 @@ recurrence.date = {
   },
 
   isleap: function (date) {
-    var year = date.getFullYear();
+    var year = date.getUTCFullYear();
     return year % 4 == 0 && (year % 100 != 0 || year % 400 == 0);
   },
 
   weekday: function (date) {
-    var day = date.getDay() - 1;
+    var day = date.getUTCDay() - 1;
     if (day < 0) day = day + 7;
     else if (day > 6) day = day - 7;
     return day;
   },
 
   days_in_month: function (date) {
-    var m = date.getMonth() + 1;
-    var y = date.getFullYear();
+    var m = date.getUTCMonth() + 1;
+    var y = date.getUTCFullYear();
     if (m == 1 || m == 3 || m == 5 || m == 7 || m == 8 || m == 10 || m == 12) return 31;
     else if (m == 4 || m == 6 || m == 9 || m == 11) return 30;
     else if (m == 2 && recurrence.date.isleap(date)) return 29;
