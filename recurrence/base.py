@@ -1146,7 +1146,7 @@ def rule_to_text(rule, short=False):
             -3: _('3rd last'),
             -4: _('4th last'),
         }
-        weekdays_display = list(dates.WEEKDAYS_ABBR.values())
+        weekdays_display = list(map(str, dates.WEEKDAYS_ABBR.values()))
         months_display = [date.capitalize() for date in dates.MONTHS_3.values()]
 
     else:
@@ -1166,8 +1166,8 @@ def rule_to_text(rule, short=False):
             -3: _('third last'),
             -4: _('fourth last'),
         }
-        weekdays_display = list(dates.WEEKDAYS.values())
-        months_display = list(dates.MONTHS.values())
+        weekdays_display = list(map(str, dates.WEEKDAYS.values()))
+        months_display = list(map(str, dates.MONTHS.values()))
 
     def get_positional_weekdays(rule):
         items = []
