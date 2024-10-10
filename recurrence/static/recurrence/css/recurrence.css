@@ -2,12 +2,12 @@ textarea.recurrence-widget {
   display: none;
 }
 div.recurrence-widget {
-  background-color: var(--body-bg);
-  border: 1px solid var(--border-color);
+  background-color: var(--dj-recurrence-body-bg);
+  border: 1px solid var(--dj-recurrence-border-color);
 }
 
 div.recurrence-widget div.panel {
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--dj-recurrence-border-color);
   display: flex;
   flex-direction: column;
 }
@@ -41,7 +41,7 @@ div.recurrence-widget .remove:visited {
   font-weight: bold;
   cursor: pointer;
   text-decoration: none;
-  color: var(--body-quiet-color);
+  color: var(--dj-recurrence-body-quiet-color);
   line-height: 1.4em;
   background-color: transparent;
   border: none;
@@ -77,7 +77,7 @@ div.recurrence-widget .interval {
 
 div.recurrence-widget .dtstart {
   padding: 1em 0;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--dj-recurrence-border-color);
 }
 
 div.recurrence-widget .dtstart .dtstart-date {
@@ -86,7 +86,7 @@ div.recurrence-widget .dtstart .dtstart-date {
 
 div.recurrence-widget .limit {
   padding: 1em 0 0 0;
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid var(--dj-recurrence-border-color);
 }
 
 div.recurrence-widget .limit ul {
@@ -128,7 +128,7 @@ div.recurrence-widget .weekday-grid {
 }
 
 div.recurrence-widget .weekday-grid .weekday {
-  background: var(--body-bg);
+  background: var(--dj-recurrence-body-bg);
   padding: 10px 15px;
   border: none;
   border-radius: 4px;
@@ -155,14 +155,14 @@ div.recurrence-widget .section {
 
 div.recurrence-widget .grid {
   border: 0;
-  border-top: 1px solid var(--border-color);
-  border-left: 1px solid var(--border-color);
+  border-top: 1px solid var(--dj-recurrence-border-color);
+  border-left: 1px solid var(--dj-recurrence-border-color);
 }
 
 div.recurrence-widget .grid td {
   text-align: center;
-  border-bottom: 1px solid var(--border-color);
-  border-right: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--dj-recurrence-border-color);
+  border-right: 1px solid var(--dj-recurrence-border-color);
   padding: .8em;
   cursor: pointer;
   transition: all 0.15s;
@@ -202,7 +202,7 @@ div.recurrence-widget .date-value {
 div.recurrence-widget form {
     overflow: hidden;
     padding: .5em 2.2em;
-    border-top: 1px solid var(--border-color);
+    border-top: 1px solid var(--dj-recurrence-border-color);
 }
 
 div.recurrence-widget .form {
