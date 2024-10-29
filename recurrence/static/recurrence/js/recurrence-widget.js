@@ -252,6 +252,7 @@ recurrence.widget.RuleForm.prototype = {
     // interval
     const interval_container = root.querySelector('.interval');
     const interval_field = interval_container.querySelector('input[name="interval"]');
+    interval_field.value = this.rule.interval;
     const freq_select = interval_container.querySelector('select[name="freq"]');
 
     // limit container
@@ -272,6 +273,7 @@ recurrence.widget.RuleForm.prototype = {
       const count_container = until_count_container.querySelector('.count');
       count_radio = count_container.querySelector('input[data-name="until_count"][value="count"]');
       count_field = count_container.querySelector('input[name="count"]');
+      count_field.value = this.rule.count;
       count_radio.checked = false;
 
       // never
