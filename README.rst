@@ -1,39 +1,13 @@
+> [!NOTE]  
+> This is a fork of [jazzband/django-recurrence](https://github.com/jazzband/django-recurrence)
+that has been modified to the core and can't be easily upstreamed without accepting blindly all changes
 
 django-recurrence
 =================
 
-.. image:: https://jazzband.co/static/img/badge.svg
-   :target: https://jazzband.co/
-   :alt: Jazzband
-
-.. image:: https://img.shields.io/github/stars/jazzband/django-recurrence.svg?label=Stars&style=socialcA
-   :target: https://github.com/jazzband/django-recurrence
+.. image:: https://img.shields.io/github/stars/infofactory/django-recurrence.svg?label=Stars&style=socialcA
+   :target: https://github.com/infofactory/django-recurrence
    :alt: GitHub
-
-.. image:: https://img.shields.io/pypi/v/django-recurrence.svg
-   :target: https://pypi.org/project/django-recurrence/
-   :alt: PyPI release
-
-.. image:: https://img.shields.io/pypi/pyversions/django-recurrence.svg
-   :target: https://pypi.org/project/django-recurrence/
-   :alt: Supported Python versions
-
-.. image:: https://img.shields.io/pypi/djversions/django-recurrence.svg
-   :target: https://pypi.org/project/django-recurrence/
-   :alt: Supported Django versions
-
-.. image:: https://img.shields.io/readthedocs/django-recurrence.svg
-   :target: https://django-recurrence.readthedocs.io/
-   :alt: Documentation
-
-.. image:: https://github.com/jazzband/django-recurrence/workflows/Test/badge.svg
-   :target: https://github.com/jazzband/django-recurrence/actions
-   :alt: GitHub actions
-
-.. image:: https://codecov.io/gh/jazzband/django-recurrence/branch/master/graph/badge.svg
-   :target: https://codecov.io/gh/jazzband/django-recurrence
-   :alt: Coverage
-
 
 django-recurrence is a utility for working with recurring dates in Django.
 
@@ -42,7 +16,7 @@ Functionality
 -------------
 
 * Recurrence/Rule objects using a subset of rfc2445
-  (wraps ``dateutil.rrule``) for specifying recurring date/times,
+  (wraps ``dateutil.rrule``) for specifying recurring dates,
 * ``RecurrenceField`` for storing recurring datetimes in the database, and
 * JavaScript widget.
 
@@ -54,13 +28,13 @@ in your app. You could use a model like this:
 
 .. code:: python
 
-   import recurrence.fields
+   from recurrence.fields import RecurrenceField
 
    class Course(models.Model):
        title = models.CharField(max_length=200)
        start = models.TimeField()
        end = models.TimeField()
-       recurrences = recurrence.fields.RecurrenceField()
+       recurrences = RecurrenceField()
 
 You’ll notice that I’m storing my own start and end time.
 The recurrence field only deals with *recurrences*
@@ -72,7 +46,8 @@ Its recurrences would be “every Friday”.
 Documentation
 -------------
 
-For more information on installation and configuration see the documentation at:
+> [!WARNING]  
+> Currently there is no documentation for this fork, you can check the original documentation here
 
 https://django-recurrence.readthedocs.io/
 
@@ -82,7 +57,7 @@ Issues
 
 If you have questions or have trouble using the app please file a bug report at:
 
-https://github.com/jazzband/django-recurrence/issues
+https://github.com/infofactory/django-recurrence/issues
 
 
 Contributions
@@ -107,5 +82,3 @@ on the currently officially supported Python and Django versions.
 
 The test automation is run automatically with GitHub Actions, but you can
 run it locally with the ``tox`` command before pushing commits.
-
-This is a `Jazzband <https://jazzband.co>`_ project. By contributing you agree to abide by the `Contributor Code of Conduct <https://jazzband.co/about/conduct>`_ and follow the `guidelines <https://jazzband.co/about/guidelines>`_.
