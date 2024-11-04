@@ -73,3 +73,9 @@ on the currently officially supported Python and Django versions.
 
 The test automation is run automatically with GitHub Actions, but you can
 run it locally with the ``tox`` command before pushing commits.
+
+## Contributors
+
+<a href="https://github.com/infofactory/django-recurrence/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=infofactory/django-recurrence" width="100%"/>
+</a>
