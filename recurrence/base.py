@@ -363,6 +363,9 @@ class Recurrence:
         """
         Get a generator yielding `datetime.datetime` instances in this
         occurrence set.
+        Given that this library works with dates only the time is set to 0.
+        If you want to have more control on the time use `to_dateutil_rruleset`
+        directly.
 
         :Parameters:
             `dtstart` : datetime.datetime
@@ -381,6 +384,17 @@ class Recurrence:
         :Returns:
             A sequence of `datetime.datetime` instances.
         """
+
+        dtstart = dtstart or self.dtstart
+        dtend = dtend or self.dtend
+
+        if dtstart is not None:
+            dtstart = dtstart.replace(hour=0, minute=0, second=0, microsecond=0)
+        else:
+            dtstart = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+        if dtend is not None:
+            dtend = dtend.replace(hour=0, minute=0, second=0, microsecond=0)
+
         return self.to_dateutil_rruleset(dtstart, dtend, cache)
 
     def count(self, dtstart=None, dtend=None, cache=False):
@@ -404,7 +418,7 @@ class Recurrence:
         :Returns:
             The number of occurrences in this occurrence set.
         """
-        return self.to_dateutil_rruleset(dtstart, dtend, cache).count()
+        return self.occurrences(dtstart, dtend, cache).count()
 
     def before(
         self, dt, inc=False,
@@ -439,8 +453,7 @@ class Recurrence:
         :Returns:
             A `datetime.datetime` instance.
         """
-        return self.to_dateutil_rruleset(
-            dtstart, dtend, cache).before(dt, inc)
+        return self.occurrences(dtstart, dtend, cache).before(dt, inc)
 
     def after(
         self, dt, inc=False,
@@ -475,7 +488,7 @@ class Recurrence:
         :Returns:
             A `datetime.datetime` instance.
         """
-        return self.to_dateutil_rruleset(dtstart, dtend, cache).after(dt, inc)
+        return self.occurrences(dtstart, dtend, cache).after(dt, inc)
 
     def between(
         self, after, before,
@@ -514,8 +527,7 @@ class Recurrence:
         :Returns:
             A sequence of `datetime.datetime` instances.
         """
-        return self.to_dateutil_rruleset(
-            dtstart, dtend, cache).between(after, before, inc)
+        return self.occurrences(dtstart, dtend, cache).between(after, before, inc)
 
     def to_dateutil_rruleset(self, dtstart=None, dtend=None, cache=False):
         """
