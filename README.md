@@ -1,24 +1,19 @@
 > [!NOTE]  
 > This is a fork of [jazzband/django-recurrence](https://github.com/jazzband/django-recurrence)
-that has been modified to the core and can't be easily upstreamed without accepting blindly all changes
+> that has been modified to the core and can't be easily upstreamed without accepting blindly all changes
 
-django-recurrence
-=================
+# django-recurrence
 
-.. image:: https://img.shields.io/github/stars/infofactory/django-recurrence.svg?label=Stars&style=socialcA
-   :target: https://github.com/infofactory/django-recurrence
-   :alt: GitHub
+[![Stars](https://img.shields.io/github/stars/infofactory/django-recurrence.svg?label=Stars&style=social)](https://github.com/infofactory/django-recurrence)
 
 django-recurrence is a utility for working with recurring dates in Django.
 
+## Functionality
 
-Functionality
--------------
-
-* Recurrence/Rule objects using a subset of rfc2445
-  (wraps ``dateutil.rrule``) for specifying recurring dates,
-* ``RecurrenceField`` for storing recurring datetimes in the database, and
-* JavaScript widget.
+*   Recurrence/Rule objects using a subset of rfc2445
+    (wraps ``dateutil.rrule``) for specifying recurring dates,
+*   ``RecurrenceField`` for storing recurring datetimes in the database, and
+*   JavaScript widget.
 
 ``RecurrenceField`` provides a Django model field which serializes
 recurrence information for storage in the database.
@@ -26,15 +21,15 @@ recurrence information for storage in the database.
 For example - say you were storing information about a university course
 in your app. You could use a model like this:
 
-.. code:: python
+```python
+from recurrence.fields import RecurrenceField
 
-   from recurrence.fields import RecurrenceField
-
-   class Course(models.Model):
-       title = models.CharField(max_length=200)
-       start = models.TimeField()
-       end = models.TimeField()
-       recurrences = RecurrenceField()
+class Course(models.Model):
+    title = models.CharField(max_length=200)
+    start = models.TimeField()
+    end = models.TimeField()
+    recurrences = RecurrenceField()
+```
 
 You’ll notice that I’m storing my own start and end time.
 The recurrence field only deals with *recurrences*
@@ -43,25 +38,21 @@ I have an event that starts at 2pm.
 Its recurrences would be “every Friday”.
 
 
-Documentation
--------------
-
+## Documentation
 > [!WARNING]  
 > Currently there is no documentation for this fork, you can check the original documentation here
 
 https://django-recurrence.readthedocs.io/
 
 
-Issues
-------
+## Issues
 
 If you have questions or have trouble using the app please file a bug report at:
 
 https://github.com/infofactory/django-recurrence/issues
 
 
-Contributions
--------------
+## Contributions
 
 All contributions are welcome!
 
