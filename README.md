@@ -10,10 +10,10 @@ django-recurrence is a utility for working with recurring dates in Django.
 
 ## Functionality
 
-*   Recurrence/Rule objects using a subset of rfc2445
-    (wraps ``dateutil.rrule``) for specifying recurring dates,
-*   ``RecurrenceField`` for storing recurring datetimes in the database, and
-*   JavaScript widget.
+* Recurrence/Rule objects using a subset of rfc2445  
+  (wraps ``dateutil.rrule``) for specifying recurring dates,
+* ``RecurrenceField`` for storing recurring datetimes in the database, and
+* JavaScript widget.
 
 ``RecurrenceField`` provides a Django model field which serializes
 recurrence information for storage in the database.
@@ -31,9 +31,9 @@ class Course(models.Model):
     recurrences = RecurrenceField()
 ```
 
-You’ll notice that I’m storing my own start and end time.
+You’ll notice that I’m storing my own start and end time.  
 The recurrence field only deals with *recurrences*
-not with specific time information.
+not with specific time information.  
 I have an event that starts at 2pm.
 Its recurrences would be “every Friday”.
 
