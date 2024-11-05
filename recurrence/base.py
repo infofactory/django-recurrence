@@ -391,7 +391,7 @@ class Recurrence:
         if dtstart is not None:
             dtstart = dtstart.replace(hour=0, minute=0, second=0, microsecond=0)
         else:
-            dtstart = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+            dtstart = datetime.datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
         if dtend is not None:
             dtend = dtend.replace(hour=0, minute=0, second=0, microsecond=0)
 
