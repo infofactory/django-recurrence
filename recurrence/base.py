@@ -495,8 +495,7 @@ class Recurrence:
         inc=False, dtstart=None, dtend=None, cache=False
     ):
         """
-        Returns the first recurrence after the given
-        `datetime.datetime` instance.
+        Returns all the occurrences between after and before.
 
         :Parameters:
             `after` : datetime.datetime
@@ -528,6 +527,37 @@ class Recurrence:
             A sequence of `datetime.datetime` instances.
         """
         return self.occurrences(dtstart, dtend, cache).between(after, before, inc)
+    
+    def xafter(self, dt, count=None, inc=False,
+        dtstart=None, dtend=None, cache=False):
+        """
+        Generator which yields up to `count` recurrences after the given
+        datetime instance, equivalent to `after`.
+
+        :Parameters:
+            `dt` : datetime.datetime
+                The datetime at which to start generating recurrences.
+
+            `count` : int
+                The maximum number of recurrences to generate. If `None` (default),
+                dates are generated until the recurrence rule is exhausted.
+
+            `inc` : bool
+                If `dt` is an instance of the rule and `inc` is `True`, it is
+                included in the output.
+
+            `dtstart` : datetime.datetime
+                Optionally specify the first occurrence of the
+                occurrence set. Defaults to `dt`.
+
+            `dtend` : datetime.datetime
+                Optionally specify the last occurrence of the
+                occurrence set. Defaults to `self.dtend` if specified.
+
+            `cache` : bool
+                Whether to cache the occurrence set generator.
+            """
+        return self.occurrences(dtstart or dt, dtend, cache).xafter(dt, count, inc)
 
     def to_dateutil_rruleset(self, dtstart=None, dtend=None, cache=False):
         """
