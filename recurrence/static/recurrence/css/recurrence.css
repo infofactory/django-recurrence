@@ -1,8 +1,22 @@
+:root {
+  /* var mappings for django admin theme*/
+  --dj-recurrence-bg: var(--body-bg);
+  --dj-recurrence-fg: var(--body-fg);
+  --dj-recurrence-fg-secondary: var(--body-quiet-color);
+  --dj-recurrence-fg-danger: #a00;
+  --dj-recurrence-border-color: var(--border-color);
+  --dj-recurrence-button-bg: var(--button-bg);
+  --dj-recurrence-button-fg: var(--button-fg);
+  --dj-recurrence-button-close-bg: var(--close-button-bg);
+  --dj-recurrence-button-active-bg: var(--default-button-bg);
+  --dj-recurrence-button-active-hover-bg: var(--default-button-hover-bg);
+}
+
 textarea.recurrence-widget {
   display: none;
 }
 div.recurrence-widget {
-  background-color: var(--dj-recurrence-body-bg);
+  background-color: var(--dj-recurrence-bg);
   border: 1px solid var(--dj-recurrence-border-color);
 }
 
@@ -24,7 +38,7 @@ div.recurrence-widget div.panel div.header .title {
   font-weight: bold;
   white-space: nowrap;
   padding-right: 3em;
-  color: var(--body-fg);
+  color: var(--dj-recurrence-fg);
   flex-grow: 1;
   margin: 0;
 }
@@ -41,14 +55,14 @@ div.recurrence-widget .remove:visited {
   font-weight: bold;
   cursor: pointer;
   text-decoration: none;
-  color: var(--dj-recurrence-body-quiet-color);
+  color: var(--dj-recurrence-fg-secondary);
   line-height: 1.4em;
   background-color: transparent;
   border: none;
 }
 
 div.recurrence-widget .remove:hover {
-  color: #a00;
+  color: var(--dj-recurrence-fg-danger);
 }
 
 div.recurrence-widget .control {
@@ -128,24 +142,24 @@ div.recurrence-widget .weekday-grid {
 }
 
 div.recurrence-widget .weekday-grid .weekday {
-  background: var(--dj-recurrence-body-bg);
+  background: var(--dj-recurrence-bg);
   padding: 10px 15px;
   border: none;
   border-radius: 4px;
-  color: var(--body-fg);
+  color: var(--dj-recurrence-fg);
   cursor: pointer;
   transition: all 0.15s;
-  border: 1px solid var(--default-button-bg);
+  border: 1px solid var(--dj-recurrence-button-active-bg);
 }
 
 div.recurrence-widget .weekday-grid .weekday.active {
-  background: var(--default-button-bg);
-  color: var(--button-fg);
+  background: var(--dj-recurrence-button-active-bg);
+  color: var(--dj-recurrence-button-fg);
 }
 
 div.recurrence-widget .weekday-grid .weekday:hover {
-  background: var(--default-button-hover-bg);
-  color: var(--button-fg);
+  background: var(--dj-recurrence-button-active-hover-bg);
+  color: var(--dj-recurrence-button-fg);
 }
 
 
@@ -169,8 +183,8 @@ div.recurrence-widget .grid td {
 }
 
 div.recurrence-widget .grid td.active {
-  background-color: var(--button-bg);
-  color: var(--button-fg);
+  background-color: var(--dj-recurrence-button-bg);
+  color: var(--dj-recurrence-button-fg);
 }
 
 div.recurrence-widget .grid td.empty {
@@ -178,7 +192,7 @@ div.recurrence-widget .grid td.empty {
 }
 
 div.recurrence-widget .grid[data-readonly] td.active {
-  background-color: var(--close-button-bg);
+  background-color: var(--dj-recurrence-button-close-bg);
 }
 
 
