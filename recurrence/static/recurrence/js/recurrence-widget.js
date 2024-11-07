@@ -21,6 +21,16 @@ recurrence.widget.Widget.prototype = {
     this.options = options;
 
     this.default_freq = options.default_freq || recurrence.WEEKLY;
+    this.default_options = {}
+
+    switch (options.defaultEnd) {
+      case 'COUNT':
+        this.default_options.count = 1;
+        break;
+      case 'UNTIL':
+        this.default_options.until = recurrence.widget.date_today();
+        break;
+    }
 
     this.init_dom();
     this.init_panels();
@@ -88,15 +98,15 @@ recurrence.widget.Widget.prototype = {
   },
 
   add_rule: function(rule) {
-    var rule = rule || new recurrence.Rule(this.default_freq);
+    var rule = rule || new recurrence.Rule(this.default_freq, this.default_options);
     this.data.rrules.push(rule);
-    this.add_rule_panel(recurrence.widget.INCLUSION, rule, {isNew: true}).expand();
+    this.add_rule_panel(recurrence.widget.INCLUSION, rule).expand();
   },
 
   add_date: function(date) {
     var date = date || recurrence.widget.date_today();
     this.data.rdates.push(date);
-    this.add_date_panel(recurrence.widget.INCLUSION, date, {isNew: true}).expand();
+    this.add_date_panel(recurrence.widget.INCLUSION, date).expand();
   },
 
   update: function() {
@@ -262,7 +272,7 @@ recurrence.widget.RuleForm.prototype = {
       const until_count_container = limit_container.querySelector('.until-count');
 
       // until
-      const until_value = this.rule.until ? recurrence.date.format(this.rule.until, '%Y-%m-%d') : new Date().toISOString().slice(0, 10)+"T00:00:00Z";
+      const until_value = this.rule.until ? recurrence.date.format(this.rule.until, '%Y-%m-%d') : recurrence.widget.date_today().toISOString().split('T')[0];
       const until_container = until_count_container.querySelector('.until');
       until_date_selector = until_count_container.querySelector('input[type="date"]');
       until_radio = until_container.querySelector('input[data-name="until_count"][value="until"]');
@@ -273,7 +283,7 @@ recurrence.widget.RuleForm.prototype = {
       const count_container = until_count_container.querySelector('.count');
       count_radio = count_container.querySelector('input[data-name="until_count"][value="count"]');
       count_field = count_container.querySelector('input[name="count"]');
-      count_field.value = this.rule.count;
+      count_field.value = this.rule.count || 1;
       count_radio.checked = false;
 
       // never
@@ -306,16 +316,16 @@ recurrence.widget.RuleForm.prototype = {
     };
 
     if (showRRuleEnd) {
-      if (!form.options.isNew) {
-        if (form.rule.count) {
-          count_radio.checked = true;
-          until_date_selector.disabled = true;
-        } else if (form.rule.until) {
-          until_radio.checked = true;
-          count_field.disabled = true;
-        } else {
-          never_radio.checked = true;
-        }
+      if (form.rule.count) {
+        count_radio.checked = true;
+        until_date_selector.disabled = true;
+      } else if (form.rule.until) {
+        until_radio.checked = true;
+        count_field.disabled = true;
+      } else {
+        never_radio.checked = true;
+        until_date_selector.disabled = true;
+        count_field.disabled = true;
       }
 
       until_radio.onclick = function () {
@@ -369,21 +379,7 @@ recurrence.widget.RuleForm.prototype = {
     };
 
     if (showRRuleEnd) {
-      // const count_value = this.rule.count ? this.rule.count : 1;
-      // this.update_count_text(count_value);
-
-      if (this.options.isNew) {
-        const defaultEnd = form.panel.widget.options.defaultEnd;
-        if (defaultEnd) {
-          if (defaultEnd == 'COUNT') {
-            count_radio.onclick();
-          } else if (defaultEnd == 'UNTIL') {
-            until_radio.onclick();
-          } else if (defaultEnd == 'NEVER') {
-            never_radio.onclick();
-          }
-        }
-      }
+      this.update_count_text(this.rule.count ?? 1);
     }
 
     // freq forms
