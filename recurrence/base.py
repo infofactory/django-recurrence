@@ -323,6 +323,11 @@ class Recurrence:
         self.exdates = list(exdates)
         self.include_dtstart = include_dtstart
 
+        (calc_dtstart, calc_dtend) = self.__get_bracket_dt()
+
+        self.calc_dtstart = calc_dtstart
+        self.calc_dtend = calc_dtend
+
     def __iter__(self):
         return self.occurrences()
 
@@ -356,6 +361,45 @@ class Recurrence:
 
     def __ne__(self, other):
         return not self.__eq__(other)
+    
+    def __get_bracket_dt(self):
+        dtstart = None
+        dtend = None
+
+        for rrule in self.rrules:
+            this_dtstart = None
+            if rrule.dtstart:
+                this_dtstart = rrule.dtstart
+            else:
+                this_dtstart = datetime.datetime.min
+
+            this_dtend = None
+            if not rrule.until and not rrule.count:
+                this_dtend = datetime.datetime.max
+            elif rrule.until:
+                this_dtend = rrule.until
+            elif rrule.count:
+                # we are sure there is an end
+                this_dtend = rrule.to_dateutil_rrule().before(datetime.datetime.max, inc=True)
+
+            if dtstart is None or normalize_offset_awareness(this_dtstart, dtstart) < dtstart:
+                dtstart = this_dtstart
+            if dtend is None or normalize_offset_awareness(this_dtend, dtend) > dtend:
+                dtend = this_dtend
+
+        # Same for dates
+        for rdate in self.rdates:
+            if dtstart is None or normalize_offset_awareness(rdate, dtstart) < dtstart:
+                dtstart = rdate
+            if dtend is None or normalize_offset_awareness(rdate, dtend) > dtend:
+                dtend = rdate
+
+        if dtstart == datetime.datetime.min:
+            dtstart = None
+        if dtend == datetime.datetime.max:
+            dtend = None
+
+        return dtstart, dtend
 
     def occurrences(
         self, dtstart=None, dtend=None, cache=False
@@ -385,8 +429,8 @@ class Recurrence:
             A sequence of `datetime.datetime` instances.
         """
 
-        dtstart = dtstart or self.dtstart
-        dtend = dtend or self.dtend
+        dtstart = dtstart or self.dtstart or self.calc_dtstart
+        dtend = dtend or self.dtend or self.calc_dtend
 
         if dtstart is not None:
             dtstart = dtstart.replace(hour=0, minute=0, second=0, microsecond=0)
@@ -557,7 +601,9 @@ class Recurrence:
             `cache` : bool
                 Whether to cache the occurrence set generator.
             """
-        return self.occurrences(self.dtstart or dtstart or dt, dtend, cache).xafter(dt, count, inc)
+        
+        dtstart = dtstart or self.dtstart or self.calc_dtstart or dt
+        return self.occurrences(dtstart, dtend, cache).xafter(dt, count, inc)
 
     def to_dateutil_rruleset(self, dtstart=None, dtend=None, cache=False):
         """
