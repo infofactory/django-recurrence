@@ -323,10 +323,10 @@ class Recurrence:
         self.exdates = list(exdates)
         self.include_dtstart = include_dtstart
 
-        (calc_dtstart, calc_dtend) = self.__get_bracket_dt()
+        self.calc_dtstart = None
+        self.calc_dtend = None
 
-        self.calc_dtstart = calc_dtstart
-        self.calc_dtend = calc_dtend
+        self.update_bracket_dt()
 
     def __iter__(self):
         return self.occurrences()
@@ -362,7 +362,7 @@ class Recurrence:
     def __ne__(self, other):
         return not self.__eq__(other)
     
-    def __get_bracket_dt(self):
+    def update_bracket_dt(self):
         dtstart = None
         dtend = None
 
@@ -399,7 +399,8 @@ class Recurrence:
         if dtend == datetime.datetime.max:
             dtend = None
 
-        return dtstart, dtend
+        self.calc_dtstart = dtstart
+        self.calc_dtend = dtend
 
     def occurrences(
         self, dtstart=None, dtend=None, cache=False
