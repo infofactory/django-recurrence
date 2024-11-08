@@ -557,7 +557,7 @@ class Recurrence:
             `cache` : bool
                 Whether to cache the occurrence set generator.
             """
-        return self.occurrences(dtstart or dt, dtend, cache).xafter(dt, count, inc)
+        return self.occurrences(self.dtstart or dtstart or dt, dtend, cache).xafter(dt, count, inc)
 
     def to_dateutil_rruleset(self, dtstart=None, dtend=None, cache=False):
         """
